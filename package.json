@@ -1,0 +1,20 @@
+{
+  "name": "mentor-bot-server",
+  "version": "0.0.1",
+  "description": "Mentor Bot Server",
+  "scripts": {
+    "bot": "node bin/bot"
+  },
+  "author": "Eugene Kovalev",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.14.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-es2016": "^6.11.3",
+    "babel-preset-stage-0": "^6.5.0",
+    "immutable": "^3.8.1",
+    "request": "^2.74.0",
+    "rethinkdb": "^2.3.2"
+  }
+}
