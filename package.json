@@ -16,5 +16,10 @@
     "immutable": "^3.8.1",
     "request": "^2.74.0",
     "rethinkdb": "^2.3.2"
+  },
+  "devDependencies": {
+    "shipit-deploy": "^2.2.0",
+    "shipit-npm": "^0.2.0",
+    "shipit-shared": "^4.4.1"
   }
 }

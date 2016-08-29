@@ -11,6 +11,7 @@ const handleUpdate = ({ new_val, old_val }) => {
   const bot = new Bot(attributes)
 
   messaging.forEach(messaging => {
+    console.log(messaging)
     if (messaging.message) {
       callbacks['message'] && callbacks['message'].forEach(callback => callback({ bot, messaging }))
     }
