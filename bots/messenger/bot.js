@@ -2,6 +2,22 @@ import Immutable from 'immutable'
 import FB from './api'
 
 
+const mapCourseToGenericTemplateElement = (course) => ({
+  title     : course.author,
+  subtitle  : course.name,
+  buttons   : [
+    {
+      type    : 'postback',
+      title   : course.name,
+      payload : JSON.stringify({
+        id    : course.id,
+        type  : 'course'
+      })
+    }
+  ]
+})
+
+
 class Bot {
 
   constructor(attributes) {
@@ -12,6 +28,13 @@ class Bot {
     path = Array.isArray(path) ? path : path.toString().split('.')
     return this.attributes.getIn(path, defaultValue)
   }
+
+
+  sendCourseList = (recipient_id, courses) =>
+    this.sendGenericMessage(
+      recipient_id,
+      courses.map(mapCourseToGenericTemplateElement)
+    )
 
 
   sendTextMessage = (recipient_id, message_text) =>
