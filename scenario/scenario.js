@@ -1,3 +1,7 @@
+import Operation from './operation'
+import Operations from './operations'
+
+
 class Scenario {
 
   constructor({ id, operations, ...config }) {
@@ -5,7 +9,27 @@ class Scenario {
     this.operations = operations
     this.config     = config
 
+    this.instantiateOperations()
     this.resolveLabels()
+  }
+
+  instantiateOperations = () => {
+    let valid = true
+
+    let operations = this.operations.map(operationConfig => {
+      if (operationConfig instanceof Operation)
+        return operationConfig
+
+      let { type, ...attributes } = operationConfig
+
+      if (Operations[type])
+        return new Operations[type](attributes)
+
+      valid = false
+    })
+
+    this.valid      = valid
+    this.operations = operations
   }
 
   resolveLabels = () => {
@@ -106,5 +130,6 @@ class Scenario {
 
 
 }
+
 
 export default Scenario
