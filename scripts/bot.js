@@ -2,11 +2,13 @@ import {
   Messenger
 } from '../bots'
 
+import Execution from '../execution'
 
-Messenger.on('message', ({ bot, messaging: { sender, message } }) => {
-  if (!message.is_echo)
-    bot.sendTextMessage(sender.id, 'Message received.')
-})
+import FB from '../bots/messenger/api'
+
+
+Messenger.on('message', Execution.resolve)
+Messenger.on('postback', Execution.resolve)
 
 
 Messenger.start()
