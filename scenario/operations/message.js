@@ -14,28 +14,34 @@ export default class extends Operation {
   constructor(config) {
     super(config)
 
-    this.text           = config.text
-    this.quick_replies  = config.quick_replies
+    this.config = config
 
-    this.config         = config
+    this.resolveText()
+    this.resolveQuickReplies()
   }
+
+
+  resolveText = () =>
+    this.text = (this.config.text || '').trim().replace(/\n\s+/g, '\n')
+
+
+  resolveQuickReplies = () =>
+    this.quick_replies = (Array.isArray(this.config.quick_replies) ? this.config.quick_replies : [])
+      .map(quick_reply => ({
+        title         : quick_reply,
+        payload       : quick_reply.toLowerCase(),
+        content_type  : 'text',
+      }))
 
 
   resolve = async (bot, messaging, context, next) => {
     await bot.sendSenderAction(messaging.sender.id, 'typing_on')
 
-    let quick_replies = (Array.isArray(this.quick_replies) && this.quick_replies || []).map(title => ({
-      content_type  : 'text',
-      title         : title,
-      payload       : title.toLowerCase()
-    }))
+    if (this.quick_replies.length > 0)
+      await bot.sendQuickReply(messaging.sender.id, this.text, this.quick_replies)
 
-    let text = this.text.trim().replace(/\n\s+/g, '\n')
-
-    if (quick_replies.length > 0)
-      await bot.sendQuickReply(messaging.sender.id, text, quick_replies)
-    else
-      await bot.sendTextMessage(messaging.sender.id, text)
+    if (this.quick_replies.length === 0)
+      await bot.sendTextMessage(messaging.sender.id, this.text)
 
     next()
   }
