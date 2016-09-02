@@ -9,44 +9,58 @@ export default new Scenario({
   id: 'coffee-bot-main',
 
   operations: [
-    new Operations['message']({
+
+    {
+      type  : 'message',
       text  : `
         Hello. I am a test version of the CoffeeBot.
         I can teach you a thing or two about a coffee and can provide you with some recipes.
       `
-    }),
+    },
 
-    new Operations['message']({
+    {
+      type  : 'message',
       label : 'chooser',
       text  : `
         Now select a course that you would like to see.
       `
-    }),
+    },
 
-    new Operations['course-chooser']({
-      branch: {
-        'empty'     : 'no-courses',
-        '404'       : '404',
-      },
-      next  : 'finish'
-    }),
+    {
+      type    : 'course-chooser',
+      next    : 'finish',
+      branch  : {
+        'empty' : 'no courses',
+        '404'   : '404'
+      }
+    },
 
-    new Operations['message']({
+    {
+      type  : 'message',
       label : '404',
-      text  : `I don't get it.`,
       next  : 'chooser',
-    }),
+      text  : `
+        I don't get it.
+      `
+    },
 
-    new Operations['message']({
+    {
+      type  : 'message',
       label : 'finish',
-      text  : `Ok, you've finished this course.`,
       next  : 'chooser',
-    }),
+      text  : `
+        Ok, you've finished this course.
+      `
+    },
 
-    new Operations['message']({
-      label : 'no-courses',
-      text  : `This bot has no courses yes.`
-    }),
+    {
+      type  : 'message',
+      label : 'no courses',
+      text  : `
+        This bot has no courses yes.
+      `
+    }
+
   ]
 
 })
