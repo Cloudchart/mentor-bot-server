@@ -6,32 +6,31 @@ import {
 } from '../../data'
 
 
-const mapCourseToElement = (courseDescriptor) => {
-  let course = courseDescriptor.source === 'local'
-    ? Courses[courseDescriptor.id]
-    : null
-
-  if (course === null || course === undefined)
-    return null
-
-  return {
-    title     : course.author,
-    subtitle  : course.name,
-    buttons   : [
-      {
-        type    : 'postback',
-        title   : course.name,
-        payload : JSON.stringify({ ...courseDescriptor, operation: 'course-chooser' })
-      }
-    ]
-  }
-}
-
 const EmptyList = new Immutable.List
 
 
-const getCourses = async (bot) =>
+const getCoursesDescriptors = async (bot) =>
   bot.get('courses', EmptyList).toJS()
+
+
+const getCourses = async (bot) =>
+  getCoursesDescriptors(bot)
+    .then(descriptors => Promise.all(descriptors.map(getCourse)))
+    .then(courses => courses.filter(course => course !== null && course !== undefined))
+
+
+const getCourse = async ({ source, id }) =>
+  source === 'local' ? Courses[id] : null
+
+
+const findCourseById = (bot, query) =>
+  getCourses(bot)
+    .then(courses => courses.find(({ id }) => id === query))
+
+
+const findCourseByName = (bot, query) =>
+  getCourses(bot)
+    .then(courses => courses.find(({ name }) => name.toLowerCase() === query))
 
 
 export default class extends Operation {
@@ -45,27 +44,48 @@ export default class extends Operation {
   }
 
 
-  resolvePostback = async (bot, messaging, context, next) => {
-    let payload = JSON.parse(messaging.postback.payload)
-
-    if (payload.operation !== 'course-chooser')
-      return next({ next: this.branch['404'] })
-
-    let courses = await getCourses(bot)
-
-    let course  = payload.source === 'local'
-      ? Courses[payload.id]
-      : null
-
+  resolveCourse = async (bot, messaging, course, next) => {
     if (course === null || course === undefined)
       return next({ next: this.branch['404'] })
+
+    if (course.scenario === null || course.scenario === undefined) {
+      await bot.sendTextMessage(messaging.sender.id, `This course doesn't have a scenario 😱.`)
+      return next()
+    }
 
     next({ scenario: course.scenario })
   }
 
-  resolveMessage = async (bot, messaging, context, next) => {
-    next({ next: this.branch['404'] })
+
+  resolvePostback = async (bot, messaging, context, next) => {
+    let payload = JSON.parse(messaging.postback.payload)
+
+    if (payload.type !== 'course')
+      return next({ next: this.branch['404'] })
+
+    let course = await findCourseById(bot, payload.id)
+
+    await this.resolveCourse(bot, messaging, course, next)
   }
+
+
+  resolveMessage = async (bot, messaging, context, next) => {
+    let query = messaging.message.text.trim().toLowerCase()
+    let course = await findCourseByName(bot, query)
+
+    await this.resolveCourse(bot, messaging, course, next)
+  }
+
+
+  resolvePrompt = async (bot, messaging, context, next) => {
+    let courses = await getCourses(bot)
+
+    if (courses.length === 0)
+      return next({ next: this.branch['empty'] })
+
+    await bot.sendCourseList(messaging.sender.id, courses)
+  }
+
 
   resolve = async (bot, messaging, context, next) => {
     if (messaging.postback)
@@ -74,17 +94,7 @@ export default class extends Operation {
     if (messaging.message)
       return this.resolveMessage(bot, messaging, context, next)
 
-    let courses = await getCourses(bot)
-
-    if (courses.length === 0)
-      return next({ next: this.branch['empty'] })
-
-    try {
-      let elements = courses.map(mapCourseToElement)
-      await bot.sendGenericMessage(messaging.sender.id, elements)
-    } catch(error) {
-      console.error(error)
-    }
+    await this.resolvePrompt(bot, messaging, context, next)
   }
 
 
