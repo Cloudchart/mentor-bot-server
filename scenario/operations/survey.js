@@ -54,8 +54,20 @@ export default class extends Operation {
 
 
   sendQuestion = async (bot, messaging, question) => {
-    await bot.sendTextMessage(messaging.sender.id, question.content).catch(console.error)
-    await bot.sendSurveyAnswers(messaging.sender.id, question.answers).catch(console.error)
+    let canBeSentAsQuickReplies = question.answers.every(({ content }) => content.trim().length <= 20)
+
+    let quick_replies = question.answers.map((answer, ii) => ({
+      title         : answer.content.trim(),
+      payload       : Letters[ii],
+      content_type  : 'text'
+    }))
+
+    if (canBeSentAsQuickReplies) {
+      await bot.sendQuickReply(messaging.sender.id, question.content, quick_replies).catch(console.error)
+    } else {
+      await bot.sendTextMessage(messaging.sender.id, question.content).catch(console.error)
+      await bot.sendSurveyAnswers(messaging.sender.id, question.answers).catch(console.error)
+    }
   }
 
 
@@ -70,7 +82,9 @@ export default class extends Operation {
 
 
   resolveMessage = async (bot, messaging, context, next) => {
-    let letter = messaging.message.text.trim().toLowerCase()
+    let letter = messaging.message.quick_reply
+      ? messaging.message.quick_reply.payload
+      : messaging.message.text.trim().toLowerCase()
 
     let question = await getNextQuestion(messaging.sender, this.survey)
     let answer = question.answers[Letters.indexOf(letter)]
