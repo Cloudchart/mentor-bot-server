@@ -19,8 +19,8 @@ export default new Scenario({
     },
 
     {
-      type  : 'message',
       label : 'chooser',
+      type  : 'message',
       text  : `
         Now select a course that you would like to see.
       `

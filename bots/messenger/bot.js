@@ -1,10 +1,11 @@
 import Immutable from 'immutable'
 import FB from './api'
 
+const Letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-const mapCourseToGenericTemplateElement = (course) => ({
-  title     : course.author,
-  subtitle  : course.name,
+const mapCourseToGenericTemplateElement = (course, ii) => ({
+  title     : course.author.trim(),
+  subtitle  : course.name.trim(),
   buttons   : [
     {
       type    : 'postback',
@@ -18,11 +19,27 @@ const mapCourseToGenericTemplateElement = (course) => ({
 })
 
 
+const mapAnswerToGenericTemplateElement = (answer, ii) => ({
+  title     : answer.content.trim(),
+  buttons   : [
+    {
+      type    : 'postback',
+      title   : Letters[ii],
+      payload : JSON.stringify({
+        id    : answer.id,
+        type  : 'answer'
+      })
+    }
+  ]
+})
+
+
 class Bot {
 
   constructor(attributes) {
     this.attributes = Immutable.fromJS(attributes)
   }
+
 
   get = (path, defaultValue) => {
     path = Array.isArray(path) ? path : path.toString().split('.')
@@ -34,6 +51,13 @@ class Bot {
     this.sendGenericMessage(
       recipient_id,
       courses.map(mapCourseToGenericTemplateElement)
+    )
+
+
+  sendSurveyAnswers = (recipient_id, answers) =>
+    this.sendGenericMessage(
+      recipient_id,
+      answers.map(mapAnswerToGenericTemplateElement)
     )
 
 
@@ -65,6 +89,13 @@ class Bot {
       this.get('access_token'),
       recipient_id,
       elements,
+    )
+
+  sendImage = (recipient_id, url) =>
+    FB.sendImage(
+      this.get('access_token'),
+      recipient_id,
+      url
     )
 
   sendSenderAction = (recipient_id, sender_action) =>
