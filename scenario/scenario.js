@@ -1,10 +1,36 @@
+// @flow
+
 import Operation from './operation'
 import Operations from './operations'
+
+import type { BotType } from '../bots'
+
+type MessagingType = {
+  sender      : {
+    id        : string
+  }
+}
+
+type ContextType = {
+  parent      : ContextType,
+  next        : number
+}
+
+type ScenarioConfig = {
+  id          : string,
+  operations  : Array<any>,
+  config      : any
+}
 
 
 class Scenario {
 
-  constructor({ id, operations, ...config }) {
+  id          : string
+  operations  : Array<any>
+  config      : any
+  valid       : boolean
+
+  constructor({ id, operations, ...config} : ScenarioConfig) {
     this.id         = id
     this.operations = operations
     this.config     = config
@@ -69,11 +95,16 @@ class Scenario {
   }
 
 
-  resolveOperation = async (operation, bot, messaging, context) => {
+  resolveOperation = async (
+    operation : Operation,
+    bot       : BotType,
+    messaging : MessagingType,
+    context   : ContextType
+  ) => {
     let scenario        = null
-    let should_continue = false
     let next_step       = null
     let next_messaging  = null
+    let should_continue = false
 
     const next = (payload = {}) => {
       scenario        = payload.scenario
@@ -93,7 +124,7 @@ class Scenario {
   }
 
 
-  resolve = async (bot, messaging, context, next) => {
+  resolve = async (bot: BotType, messaging: MessagingType, context: ContextType, next: Function) => {
     console.log('Resolving scenario', this.id)
 
     let operation_index = context.next || 0

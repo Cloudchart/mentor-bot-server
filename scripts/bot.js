@@ -1,14 +1,21 @@
+// @flow
+
 import {
   Messenger
 } from '../bots'
 
 import Execution from '../execution'
 
-import FB from '../bots/messenger/api'
+import {
+  start
+} from '../db'
 
 
-Messenger.on('message', Execution.resolve)
-Messenger.on('postback', Execution.resolve)
+start().then(() => {
 
+  Messenger.on('message', Execution.resolve)
+  Messenger.on('postback', Execution.resolve)
 
-Messenger.start()
+  Messenger.start()
+
+})

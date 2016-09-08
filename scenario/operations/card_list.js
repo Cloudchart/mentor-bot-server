@@ -5,13 +5,25 @@ import {
   Courses
 } from '../../data'
 
+import {
+  r, run,
+  Models
+} from '../../db'
 
-let ShownCards = {
+
+const ensureUserState = async (bot, user) => {
+  await run(
+    Models.UserState.get(user.id).do(
+      record =>
+        r.branch(record.ne(null), null, Models.UserState.insert({ id: user.id }))
+    )
+  )
+
+  return await Models.UserState.load(user.id)
 }
 
-
-let SelectedCards = {
-}
+let EmptyMap = new Immutable.Map
+let EmptyList = new Immutable.List
 
 
 export default class extends Operation {
@@ -28,18 +40,39 @@ export default class extends Operation {
   }
 
 
+  updateUserState = async (user) =>
+    await run(
+      Models.UserState.get(user.id).update({
+        courses: {
+          [this.course.id]: {
+            shown_cards   : r.literal(this.shown_cards.toJS()),
+            selected_card : r.literal(this.selected_card.toJS())
+          }
+        }
+      })
+    )
+
+
   resolveMessage = async (bot, messaging, context, next) => {
-    ShownCards[messaging.sender.id].push(SelectedCards[messaging.sender.id])
-    SelectedCards[messaging.sender.id] = null
+    this.shown_cards = this.selected_card.equals(EmptyMap)
+      ? EmptyList
+      : this.shown_cards.push(this.selected_card)
+    this.selected_card = EmptyMap
+
+    await this.updateUserState(messaging.sender)
+
     next({ next: this.index })
   }
 
 
   resolve = async (bot, messaging, context, next) => {
+    let userState = await ensureUserState(bot, messaging.sender)
+
+    this.selected_card = userState.getIn(['courses', this.course.id, 'selected_card'], EmptyMap)
+    this.shown_cards = userState.getIn(['courses', this.course.id, 'shown_cards'], EmptyList)
+
     if (messaging.message)
       return this.resolveMessage(bot, messaging, context, next)
-
-    ShownCards[messaging.sender.id] || (ShownCards[messaging.sender.id] = [])
 
     let course = this.course.source === 'local'
       ? Courses[this.course.id]
@@ -48,21 +81,27 @@ export default class extends Operation {
     if (course === null || course === undefined)
       next({ next: this.branch['404'] })
 
+    let shown_cards_ids = this.shown_cards.map(card => card.get('id'))
+
     let card = course.cards.find(({ id, tags }) => {
-
       let having_tag = this.tags.indexOf(tags[0]) > -1
-      let not_shown = ShownCards[messaging.sender.id].indexOf(id) === -1
+      let shown = shown_cards_ids.includes(id)
 
-      return having_tag && not_shown
+      return having_tag && !shown
     })
 
     if (card === null || card === undefined) {
-      ShownCards[messaging.sender.id] = null
-      SelectedCards[messaging.sender.id] = null
+      this.shown_cards = EmptyList
+      this.selected_card = EmptyMap
+
+      await this.updateUserState(messaging.sender)
+
       return next()
     }
 
-    SelectedCards[messaging.sender.id] = card.id
+    this.selected_card = new Immutable.Map({ id: card.id })
+
+    await this.updateUserState(messaging.sender)
 
     let quick_replies = [
       {

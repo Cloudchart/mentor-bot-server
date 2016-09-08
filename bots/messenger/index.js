@@ -43,5 +43,5 @@ const on = (event, callback) => {
 
 export default {
   on,
-  start,
+  start
 }
