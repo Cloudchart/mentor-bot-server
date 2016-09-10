@@ -103,6 +103,13 @@ export default class extends Operation {
 
     await this.updateUserState(messaging.sender)
 
+    for (let block of [].concat(card.blocks)) {
+      switch (block.type) {
+        case 'image':
+          await bot.sendImage(messaging.sender.id, block.url)
+      }
+    }
+
     let quick_replies = [
       {
         content_type  : 'text',
