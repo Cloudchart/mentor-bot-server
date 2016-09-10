@@ -12,6 +12,12 @@ export default {
   cards: [
 
     {
+      blocks  : [
+        {
+          type  : 'image',
+          url   : 'https://scontent-arn2-1.xx.fbcdn.net/v/t34.0-12/13734737_1657736551214485_1560801674_n.jpg?oh=97ec2491edd51c54d6231098c98abc2a&oe=57D605FF',
+        }
+      ],
       "content":"1. Grind coffee\r\nStart with a medium-size grind and experiment.",
       "id":"7a6593fa-dea8-4836-b870-7461ad2d036c",
       "tags":["moka"]
