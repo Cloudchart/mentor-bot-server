@@ -97,6 +97,27 @@ const sendImage = (access_token, recipient_id, url) =>
   })
 
 
+const sendVideo = (access_token, recipient_id, url) =>
+  api({
+    access_token,
+    path  : 'me/messages',
+    body  : {
+      recipient : {
+        id      : recipient_id
+      },
+      message   : {
+        attachment  : {
+          type      : "video",
+          payload   : {
+            url     : url
+          }
+        }
+      }
+    }
+
+  })
+
+
 const sendSenderAction = (access_token, recipient_id, sender_action) =>
   api({
     access_token,
@@ -142,6 +163,7 @@ export default {
   api,
   sendTextMessage,
   sendImage,
+  sendVideo,
   sendQuickReply,
   sendButtonMessage,
   sendGenericMessage,

@@ -104,10 +104,17 @@ export default class extends Operation {
     await this.updateUserState(messaging.sender)
 
     for (let block of [].concat(card.blocks)) {
-      switch (block.type) {
-        case 'image':
-          await bot.sendImage(messaging.sender.id, block.url)
-      }
+      if (block)
+        switch (block.type) {
+          case 'image':
+            await bot.sendSenderAction(messaging.sender.id, 'typing_on')
+            await bot.sendImage(messaging.sender.id, block.url)
+            break
+          case 'video':
+            await bot.sendSenderAction(messaging.sender.id, 'typing_on')
+            await bot.sendVideo(messaging.sender.id, block.url)
+            break
+        }
     }
 
     let quick_replies = [
@@ -122,7 +129,9 @@ export default class extends Operation {
       }
     ]
 
-    await bot.sendQuickReply(messaging.sender.id, card.content.length > 317 ? card.content.substring(0, 317) + '...' : card.content , quick_replies)
+    let content = card.content.trim().replace(/\n\s+/g, '\n')
+
+    await bot.sendQuickReply(messaging.sender.id, content.length > 317 ? content.substring(0, 317) + '...' : content , quick_replies)
 
   }
 

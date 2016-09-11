@@ -98,6 +98,13 @@ class Bot {
       url
     )
 
+  sendVideo = (recipient_id, url) =>
+    FB.sendVideo(
+      this.get('access_token'),
+      recipient_id,
+      url
+    )
+
   sendSenderAction = (recipient_id, sender_action) =>
     FB.sendSenderAction(
       this.get('access_token'),
