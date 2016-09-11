@@ -11,42 +11,58 @@ export default {
   cards: [
     {
       id      : '2e668303-d559-4d5d-bed0-96093f2a41be',
-      content : `Buy whole beans only. Ground coffee quickly loses its flavour and aroma because of volatiles that make a great cup of coffee. Grind coffee only before making a cup.`,
+      content : `
+        Buy whole beans only. Ground coffee quickly loses its flavour and aroma because of volatiles that make a great cup of coffee. Grind coffee only before making a cup.
+      `,
       tags    : ['buying']
     },
     {
       id      : '539f3d10-7f97-43ad-9c5d-3d0fc589adee',
-      content : `Buy fresh beans. One or two week old coffee is okay. Try to keep that under a month. No “roasted on“ date on packaging — don’t buy it.`,
+      content : `
+        Buy fresh beans. One or two week old coffee is okay. Try to keep that under a month. No “roasted on“ date on packaging — don’t buy it.
+      `,
       tags    : ['buying']
     },
     {
       id      : '4ffb3461-cd3b-488f-b3f6-0476789a19a4',
-      content : `Look for beans sealed in an airtight bag. If not, transfer coffee to an airtight bag or container immediately upon opening.`,
+      content : `
+        Look for beans sealed in an airtight bag. If not, transfer coffee to an airtight bag or container immediately upon opening.
+      `,
       tags    : ['buying']
     },
     {
       id      : 'a93ad23a-b803-4225-80c2-1bb459788935',
-      content : `Know where your coffee comes from. There’s usually a country of origin marked on the bag, but that’s not enough — ideally, you should find a region and the name of the producer as well.`,
+      content : `
+        Know where your coffee comes from. There’s usually a country of origin marked on the bag, but that’s not enough — ideally, you should find a region and the name of the producer as well.
+      `,
       tags    : ['buying']
     },
     {
       id      : '8be3268b-bd6a-4779-892d-bd722c842400',
-      content : `Treat coffee like wine — “Made in EU” is not good enough, because a bottle from Alsace would be very different from a bottle from Bordeaux. Avoid coffee blends if you don’t know the roaster, go for single-origin coffee.`,
+      content : `
+        Treat coffee like wine — “Made in EU” is not good enough, because a bottle from Alsace would be very different from a bottle from Bordeaux. Avoid coffee blends if you don’t know the roaster, go for single-origin coffee.
+      `,
       tags    : ['buying']
     },
     {
       id      : 'beb5d13d-3ecd-4806-9ac0-137e443d20d8',
-      content : `Dark roasts are a good way to mask coffee that is not very good or fresh. Avoid oily beans — a giveaway of over-roasting. Consider trying medium or even light roasts that accentuate the flavour of coffee in a balanced way.`,
+      content : `
+        Dark roasts are a good way to mask coffee that is not very good or fresh. Avoid oily beans — a giveaway of over-roasting. Consider trying medium or even light roasts that accentuate the flavour of coffee in a balanced way.
+      `,
       tags    : ['buying']
     },
     {
       id      : '04820013-198a-42ef-acd3-907b8915c986',
-      content : `Great fresh coffee that was carefully sourced and roasted is usually called “specialty coffee” or “third wave coffee”. Find a local specialty coffee roaster or a cafe that brews specialty coffee, and you’ll be all set.`,
+      content : `
+        Great fresh coffee that was carefully sourced and roasted is usually called “specialty coffee” or “third wave coffee”. Find a local specialty coffee roaster or a cafe that brews specialty coffee, and you’ll be all set.
+      `,
       tags    : ['buying']
     },
     {
       id      : '2f48f652-c1ca-403d-9014-e0788da68df5',
-      content : `For more info on specialty coffee and list of roasters and cafes, try the Third Wave Wichteln Facebook group.`,
+      content : `
+        For more info on specialty coffee and list of roasters and cafes, try the Third Wave Wichteln Facebook group.
+      `,
       tags    : ['buying'],
       origin  : {
         title : `Third Wave Wichteln Facebook Group`,
@@ -87,9 +103,11 @@ export default {
     },
 
     {
-      "content":"Keep brewing and making grind adjustments — go from coarse to fine. Note the taste — if your brew gets off-balance and bitter, that means overextraction. Go back a step and note the setting — that’s your ideal grind size for this particular method of coffee.",
-      "id":"a0667c67-01ad-402c-bb81-9d757aeb3fad",
-      "tags":["brewing"]
+      content : `
+        Keep brewing and making grind adjustments — go from coarse to fine. Note the taste — if your brew gets off-balance and bitter, that means overextraction. Go back a step and note the setting — that’s your ideal grind size for this particular method of coffee.
+      `,
+      id      : "a0667c67-01ad-402c-bb81-9d757aeb3fad",
+      tags    : ["brewing"]
     },
 
     {
