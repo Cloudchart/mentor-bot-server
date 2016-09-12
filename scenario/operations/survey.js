@@ -23,6 +23,7 @@ let getSurvey = async (descriptor) =>
 
 let getNextQuestion = async (sender, surveyDescriptor) => {
   let survey                = await getSurvey(surveyDescriptor)
+  console.log(surveyDescriptor)
   let answeredQuestionsIds  = AnsweredSurveys.getIn([sender.id, survey.id, 'questions'], EmptyMap).keySeq()
   return survey.questions.find(({ id }) => !answeredQuestionsIds.includes(id))
 }
