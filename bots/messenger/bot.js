@@ -1,7 +1,11 @@
 import Immutable from 'immutable'
 import FB from './api'
 
+import { r, run } from '../../db'
+
+
 const Letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
 
 const mapCourseToGenericTemplateElement = (course, ii) => ({
   title     : course.author.trim(),
@@ -92,18 +96,39 @@ class Bot {
     )
 
   sendImage = (recipient_id, url) =>
-    FB.sendImage(
-      this.get('access_token'),
-      recipient_id,
-      url
-    )
+    this.sendAttachment(recipient_id, 'image', url)
 
   sendVideo = (recipient_id, url) =>
-    FB.sendVideo(
+    this.sendAttachment(recipient_id, 'video', url)
+
+
+  sendAttachment = async (recipient_id, type, url) => {
+    const attachment_key = ['messenger', this.get('page_id'), type, url]
+
+    let stored_attachment_id = await run(r.table('bots_attachments').get(attachment_key)('attachment_id').default(null))
+
+    let payload = stored_attachment_id
+      ? { attachment_id: stored_attachment_id }
+      : { url: url, is_reusable: true }
+
+    let { attachment_id } = await FB.sendAttachment(
       this.get('access_token'),
       recipient_id,
-      url
+      type,
+      payload
     )
+
+    if (attachment_id !== null && attachment_id !== undefined)
+      await run(
+        r.table('bots_attachments').insert({
+          id            : attachment_key,
+          attachment_id : attachment_id
+        })
+      )
+
+    return
+  }
+
 
   sendSenderAction = (recipient_id, sender_action) =>
     FB.sendSenderAction(

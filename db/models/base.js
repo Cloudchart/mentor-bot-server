@@ -1,6 +1,9 @@
 // @flow
 
-import Immutable from 'immutable'
+import {
+  fromJS
+} from 'immutable'
+
 import DataLoader from 'dataloader'
 import { r, run } from '../db'
 
@@ -31,7 +34,7 @@ export default (modelConfig: ModelConfig) => {
     return run(Table.getAll(...ids))
       .then(cursor => cursor.toArray())
       .then(records => records.sort(compareRecords(ids)))
-      .then(records => records.map(record => Immutable.fromJS(record)))
+      .then(records => records.map(record => fromJS(record)))
   })
 
   const load      = (id)  => dataLoader.load(id)

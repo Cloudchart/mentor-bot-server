@@ -38,7 +38,7 @@ export default new Scenario({
       text    : `
         Say what?
       `,
-      next    : 'chooser'
+      next    : 'course-chooser'
     },
 
     {
