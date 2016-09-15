@@ -40,7 +40,9 @@ export default class extends Operation {
   constructor(config) {
     super(config)
 
-    this.config = config
+    this.timeout  = config.timeout
+
+    this.config   = config
   }
 
 
@@ -54,6 +56,14 @@ export default class extends Operation {
     }
 
     next({ scenario: course.scenario })
+  }
+
+
+  resolveTimeout = async (bot, messaging, context, next) => {
+    let next_step = this.next
+    if (this.timeout && this.timeout.next !== null && this.timeout.next !== undefined)
+      next_step = this.timeout.next
+    return next({ next: next_step })
   }
 
 
@@ -88,6 +98,9 @@ export default class extends Operation {
 
 
   resolve = async (bot, messaging, context, next) => {
+    if (messaging.timeout)
+      return this.resolveTimeout(bot, messaging, context, next)
+
     if (messaging.postback)
       return this.resolvePostback(bot, messaging, context, next)
 

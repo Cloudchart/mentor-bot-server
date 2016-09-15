@@ -1,7 +1,9 @@
 // @flow
 
 import {
-  fromJS
+  Map,
+  Set,
+  fromJS,
 } from 'immutable'
 
 import DataLoader from 'dataloader'
@@ -15,6 +17,12 @@ type ModelConfig = {
 type RecordType = {
   id: string,
 }
+
+let Callbacks = new Map({
+  create  : new Set,
+  update  : new Set,
+  delete  : new Set,
+})
 
 const compareRecords = (ids: Array<string>) =>
   (a: RecordType, b: RecordType) => {
@@ -43,6 +51,15 @@ export default (modelConfig: ModelConfig) => {
   const clearAll  = ()    => dataLoader.clearAll()
 
 
+  const on = (event: string, callback: Function) => {
+    Callbacks = Callbacks.set(event, Callbacks.get(event).add(callback))
+  }
+
+  const off = (event: string, callback: Function) => {
+    Callbacks = Callbacks.set(event, Callbacks.get(event).delete(callback))
+  }
+
+
   const start = async () => {
     // Create table if doesn't exists
     await run(
@@ -57,35 +74,44 @@ export default (modelConfig: ModelConfig) => {
     )
 
     // Look for data changes
-    run(Table.changes()).then(cursor => cursor.each((error, { old_val, new_val }) => {
+    run(Table.changes()).then(cursor => cursor.each(async (error, { old_val, new_val }) => {
       if (!old_val && new_val) {
-        // Create
-        // Do nothing
-        console.log('Created user state')
+        Callbacks.get('create').forEach(
+          callback =>
+            callback(new_val)
+        )
         return
       }
 
       if (old_val && new_val) {
-        // Update
-        console.log('Updated user state')
         dataLoader.clear(old_val.id)
+        Callbacks.get('update').forEach(
+          callback =>
+            callback(old_val, new_val)
+        )
         return
       }
 
       if (old_val && !new_val) {
-        // Delete
-        console.log('Deleted user state')
         dataLoader.clear(old_val.id)
+        Callbacks.get('update').forEach(
+          callback =>
+            callback(old_val)
+        )
         return
       }
     }))
   }
 
   Table.modelName = modelName
+
   Table.load      = load
   Table.loadMany  = loadMany
   Table.clear     = clear
   Table.clearAll  = clearAll
+
+  Table.on        = on
+  Table.off       = off
 
   Table.start     = start
 

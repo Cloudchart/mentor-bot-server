@@ -24,12 +24,17 @@ export default new Scenario({
     },
 
     {
+      label   : 'course-chooser',
       type    : 'course-chooser',
       next    : 'finish',
       branch  : {
         'empty' : 'no courses',
         '404'   : '404'
-      }
+      },
+      // timeout : {
+      //   delay : 60 * 1000,
+      //   next  : 'delay'
+      // }
     },
 
     {
@@ -48,6 +53,15 @@ export default new Scenario({
         Ok, you've finished this course.
       `,
       next    : 'chooser'
+    },
+
+    {
+      label   : 'delay',
+      type    : 'message',
+      text    : `
+        I'm still waiting for you.
+      `,
+      next    : 'course-chooser'
     },
 
     {

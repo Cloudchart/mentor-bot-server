@@ -9,4 +9,6 @@ export { Models }
 export const start = async () => {
   for (let modelName in Models )
     await Models[modelName].start()
+
+  console.log('Database connection initialized')
 }

@@ -4,6 +4,9 @@ import {
   Messenger
 } from '../bots'
 
+import TimeoutWatchdog from '../timeout_watchdog'
+
+
 import Execution from '../execution'
 
 import {
@@ -11,7 +14,9 @@ import {
 } from '../db'
 
 
-start().then(() => {
+start().then(async () => {
+
+  await TimeoutWatchdog.init()
 
   Messenger.on('message', Execution.resolve)
   Messenger.on('postback', Execution.resolve)

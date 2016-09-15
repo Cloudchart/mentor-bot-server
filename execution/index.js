@@ -4,6 +4,10 @@ import {
   Scenarios
 } from '../data'
 
+import MessengerBot from '../bots/messenger/bot'
+
+import TimeoutWatchdog from '../timeout_watchdog'
+
 import {
   r,
   run,
@@ -52,11 +56,23 @@ const saveScenarioState = async (bot, user, state) =>
     })
   )
 
+const saveTimeout = async (bot, user, timeout) =>
+  run(
+    Models.UserState.get(user.id).update({
+      bots: {
+        [bot.get('id')] : {
+          resolve_timeout_at  : timeout
+        }
+      }
+    })
+  )
+
 
 const ensureScenario = async (bot, user) => {
   let state = await ensureScenarioState(bot, user)
 
-  // if descriptor or descriptor.id is null or undefined check for bot descriptor
+  if (state === null || state === undefined || state.id === null || state.id === undefined)
+    state = bot.get('scenario', EmptyMap).toJS()
 
   let scenario = await state.source === 'local'
     ? Scenarios[state.id]
@@ -100,6 +116,19 @@ const getScenario = async (storage_key, bot, messaging) => {
 }
 
 
+
+const resolveTimeout = async (user_id, bot_id) => {
+  console.log('Resolving timeout', user_id, bot_id)
+
+  let bot = new MessengerBot(await run(r.table('bots').get(bot_id)))
+  let messaging = { sender: { id: user_id }, timeout: true }
+  await resolve({ bot, messaging })
+}
+
+
+TimeoutWatchdog.on(resolveTimeout)
+
+
 const resolve = async ({ bot, messaging }) => {
   // check if message is echo
   if (messaging.message && messaging.message.is_echo === true)
@@ -111,12 +140,32 @@ const resolve = async ({ bot, messaging }) => {
     return
 
   try {
+
+    // Cleanup timer
+    TimeoutWatchdog.stop(messaging.sender.id, bot.get('id'))
+    await saveTimeout(bot, messaging.sender, null)
+
     let payload = await scenario.resolve(bot, messaging, { ...state })
 
     await saveScenarioState(bot, messaging.sender, payload.context)
 
     if (payload.should_continue)
-      await resolve({ bot, messaging: { sender: messaging.sender, ...payload.messaging } })
+      return await resolve({ bot, messaging: { sender: messaging.sender, ...payload.messaging } })
+
+    // Activate timer
+    //
+    scenario = payload.context.source === 'local'
+      ? Scenarios[payload.context.id]
+      : null
+
+    let operation = scenario.operations[payload.context.next]
+
+    if (operation.timeout) {
+      let resolve_timeout_at = new Date(Date.now() + operation.timeout.delay)
+      await saveTimeout(bot, messaging.sender, resolve_timeout_at)
+      TimeoutWatchdog.start(messaging.sender.id, bot.get('id'), resolve_timeout_at)
+    }
+
   } catch(error) {
     console.error(error)
   }

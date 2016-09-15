@@ -80,6 +80,13 @@ class Scenario {
         }
       }
 
+      if (operation.timeout) {
+        operation.timeout = {
+          ...operation.timeout,
+          next : labels[operation.timeout.next]
+        }
+      }
+
       if (operation.branch) {
         operation.branch = Object.keys(operation.branch).reduce((memo, name) => {
           let label = labels[operation.branch[name]]
