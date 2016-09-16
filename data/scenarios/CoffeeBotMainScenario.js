@@ -13,7 +13,13 @@ export default new Scenario({
     {
       type  : 'message',
       text  : `
-        Hello. I am a test version of the CoffeeBot.
+        This Coffeebot is powered by Mentorbot. Find more mentorbots and create your own at getmentorbot.com
+      `
+    },
+
+    {
+      type  : 'message',
+      text  : `
         I can teach you a thing or two about a coffee and can provide you with some recipes.
       `
     },
