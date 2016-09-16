@@ -65,7 +65,7 @@ export default new Scenario({
     {
       type    : 'message',
       text    : `
-        Let's try again.
+        Let's try again. Please go through the bot one more time, this will save you and us time down the road.
       `,
       next    : 'exit',
     },
@@ -74,7 +74,7 @@ export default new Scenario({
       label   : 'survey-100',
       type    : 'message',
       text    : `
-        Send a message to review@zeptolab.com.
+        Perfect! You know what to do, so please send a message to review@zeptolab.com
       `
     }
 
