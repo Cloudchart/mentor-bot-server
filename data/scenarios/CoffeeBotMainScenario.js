@@ -33,11 +33,16 @@ export default new Scenario({
     },
 
     {
+      label   : 'course-chooser',
       type    : 'course-chooser',
       next    : 'finish',
       branch  : {
         'empty' : 'no courses',
         '404'   : '404'
+      },
+      timeout : {
+        delay : 60 * 1000,
+        next  : 'course-chooser-delay'
       }
     },
 
@@ -48,6 +53,23 @@ export default new Scenario({
       text  : `
         I don't get it.
       `
+    },
+
+    {
+      label : 'course-chooser-delay',
+      type  : 'message',
+      text  : `
+        Do you want to continue or just exit?
+      `,
+      quick_replies: ['Quit', 'Continue']
+    },
+
+    {
+      type      : 'input',
+      branch    : {
+        'quit'      : 'exit',
+        'continue'  : 'course-chooser',
+      }
     },
 
     {
