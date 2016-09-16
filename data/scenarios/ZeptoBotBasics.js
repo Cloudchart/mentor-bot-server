@@ -53,7 +53,6 @@ export default new Scenario({
     {
       label   : 'survey',
       type    : 'survey',
-      next    : 'exit',
       survey  : {
         id      : 'zepto-survey',
         source  : 'local',

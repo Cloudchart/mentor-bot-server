@@ -10,8 +10,7 @@ export default new Scenario({
     {
       type  : 'message',
       text  : `
-        Hello. I am a test version of the Zepto Publishing Bot.
-        You should pass through me if you want to get your game published.
+        Welcome to ZeptoLab Publishing Bot. This bot will help you to avoid common mistakes when dealing with publisher. Ready? Let's go.
       `
     },
 

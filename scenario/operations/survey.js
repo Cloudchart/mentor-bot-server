@@ -136,6 +136,7 @@ export default class extends Operation {
       .reverse()
       .find((value) => value <= percentage)
 
+
     if (branch !== null && branch !== undefined)
       return next({ next: this.branch[branch.toString()] })
 

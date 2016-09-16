@@ -120,12 +120,12 @@ export default class extends Operation {
     let quick_replies = [
       {
         content_type  : 'text',
-        title         : 'Skip',
-        payload       : 'skip',
+        title         : 'Got it',
+        payload       : 'got it',
       }, {
         content_type  : 'text',
-        title         : 'Remember',
-        payload       : 'remember',
+        title         : 'Save',
+        payload       : 'save',
       }
     ]
 

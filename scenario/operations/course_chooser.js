@@ -1,5 +1,6 @@
 import Immutable from 'immutable'
-import Operation from '../operation'
+import InputOperation from './input'
+// import Operation from '../operation'
 
 import {
   Courses
@@ -33,17 +34,9 @@ const findCourseByName = (bot, query) =>
     .then(courses => courses.find(({ name }) => name.toLowerCase() === query))
 
 
-export default class extends Operation {
+export default class extends InputOperation {
 
   static type = 'course-chooser';
-
-  constructor(config) {
-    super(config)
-
-    this.timeout  = config.timeout
-
-    this.config   = config
-  }
 
 
   resolveCourse = async (bot, messaging, course, next) => {
@@ -59,55 +52,29 @@ export default class extends Operation {
   }
 
 
-  resolveTimeout = async (bot, messaging, context, next) => {
-    let next_step = this.next
-    if (this.timeout && this.timeout.next !== null && this.timeout.next !== undefined)
-      next_step = this.timeout.next
-    return next({ next: next_step })
-  }
-
-
   resolvePostback = async (bot, messaging, context, next) => {
     let payload = JSON.parse(messaging.postback.payload)
-
-    if (payload.type !== 'course')
-      return next({ next: this.branch['404'] })
-
-    let course = await findCourseById(bot, payload.id)
+    let course  = await findCourseById(bot, payload.id)
 
     await this.resolveCourse(bot, messaging, course, next)
   }
 
 
   resolveMessage = async (bot, messaging, context, next) => {
-    let query = messaging.message.text.trim().toLowerCase()
-    let course = await findCourseByName(bot, query)
+    let query   = messaging.message.text.trim().toLowerCase()
+    let course  = await findCourseByName(bot, query)
 
     await this.resolveCourse(bot, messaging, course, next)
   }
 
 
-  resolvePrompt = async (bot, messaging, context, next) => {
+  resolveDefault = async (bot, messaging, context, next) => {
     let courses = await getCourses(bot)
 
     if (courses.length === 0)
       return next({ next: this.branch['empty'] })
 
     await bot.sendCourseList(messaging.sender.id, courses)
-  }
-
-
-  resolve = async (bot, messaging, context, next) => {
-    if (messaging.timeout)
-      return this.resolveTimeout(bot, messaging, context, next)
-
-    if (messaging.postback)
-      return this.resolvePostback(bot, messaging, context, next)
-
-    if (messaging.message)
-      return this.resolveMessage(bot, messaging, context, next)
-
-    await this.resolvePrompt(bot, messaging, context, next)
   }
 
 
