@@ -41,9 +41,26 @@ export default new Scenario({
       },
       branch  : {
         '404' : 'moka pot 404',
+      },
+      timeout : {
+        delay : 60 * 2 * 1000,
+        next  : 'moka-pot-delay'
       }
     }),
+    
+    new Operations['message']({
+      label         : 'moka-pot-delay',
+      text          : `Do you stil want to continue this course?`,
+      quick_replies : ['Quit', 'Continue']
+    }),
 
+    new Operations['input']({
+      branch  : {
+        'Quit'     : 'exit',
+        'Continue' : 'moka pot',
+      }
+    }),
+    
     new Operations['message']({
       label         : 'moka pot 404',
       text          : `This course has no cards.`,
@@ -59,8 +76,26 @@ export default new Scenario({
       },
       branch  : {
         '404' : 'aeropress 404',
+      },
+      timeout : {
+        delay : 60 * 3 * 1000,
+        next  : 'aeropress-delay'
       }
     }),
+
+    new Operations['message']({
+      label         : 'aeropress-delay',
+      text          : `Do you stil want to continue this course?`,
+      quick_replies : ['Quit', 'Continue']
+    }),
+
+    new Operations['input']({
+      branch  : {
+        'Quit'     : 'exit',
+        'Continue' : 'aeropress',
+      }
+    }),
+
 
     new Operations['message']({
       label         : 'aeropress 404',
