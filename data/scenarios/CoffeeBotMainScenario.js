@@ -41,7 +41,7 @@ export default new Scenario({
         '404'   : '404'
       },
       timeout : {
-        delay : 60 * 1000,
+        delay : 60 * 60 * 1000,
         next  : 'course-chooser-delay'
       }
     },
