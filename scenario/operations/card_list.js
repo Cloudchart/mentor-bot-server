@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import Operation from '../operation'
+import InputOperation from './input'
 
 import {
   Courses
@@ -26,7 +26,7 @@ let EmptyMap = new Immutable.Map
 let EmptyList = new Immutable.List
 
 
-export default class extends Operation {
+export default class extends InputOperation {
 
   static type = 'card-list';
 
@@ -38,6 +38,14 @@ export default class extends Operation {
     this.timeout  = config.timeout
 
     this.config = config
+  }
+
+
+  prepare = async (bot, user) => {
+    let userState = await ensureUserState(bot, user)
+
+    this.shown_cards    = userState.getIn(['courses', this.course.id, 'shown_cards'], EmptyList)
+    this.selected_card  = userState.getIn(['courses', this.course.id, 'selected_card'], EmptyMap)
   }
 
 
@@ -54,17 +62,9 @@ export default class extends Operation {
     )
 
 
-  resolveTimeout = async (bot, messaging, context, next) => {
-    let step = this.next
-
-    if (this.timeout && this.timeout.hasOwnProperty('next'))
-      step = this.timeout.next
-
-    next({ next: step })
-  }
-
-
   resolveMessage = async (bot, messaging, context, next) => {
+    await this.prepare(bot, messaging.sender)
+
     this.shown_cards = this.selected_card.equals(EmptyMap)
       ? EmptyList
       : this.shown_cards.push(this.selected_card)
@@ -76,17 +76,8 @@ export default class extends Operation {
   }
 
 
-  resolve = async (bot, messaging, context, next) => {
-    let userState = await ensureUserState(bot, messaging.sender)
-
-    this.selected_card = userState.getIn(['courses', this.course.id, 'selected_card'], EmptyMap)
-    this.shown_cards = userState.getIn(['courses', this.course.id, 'shown_cards'], EmptyList)
-
-    if (messaging.timeout)
-      return this.resolveTimeout(bot, messaging, context, next)
-
-    if (messaging.message)
-      return this.resolveMessage(bot, messaging, context, next)
+  resolveDefault = async (bot, messaging, context, next) => {
+    await this.prepare(bot, messaging.sender)
 
     let course = this.course.source === 'local'
       ? Courses[this.course.id]

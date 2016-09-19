@@ -112,11 +112,13 @@ class Scenario {
     let next_step       = null
     let next_messaging  = null
     let should_continue = false
+    let should_restart  = false
 
     const next = (payload = {}) => {
       scenario        = payload.scenario
       next_step       = payload.next
       next_messaging  = payload.messaging
+      should_restart  = payload.restart
       should_continue = true
     }
 
@@ -126,6 +128,7 @@ class Scenario {
       next            : next_step,
       scenario        : scenario,
       messaging       : next_messaging,
+      should_restart  : should_restart,
       should_continue : should_continue,
     }
   }
@@ -157,6 +160,9 @@ class Scenario {
 
     if (payload.scenario)
       next_context = { ...payload.scenario, parent: next_context }
+
+    if (payload.should_restart === true)
+      next_context = {}
 
     return {
       context         : next_context,

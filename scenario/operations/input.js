@@ -48,6 +48,15 @@ export default class extends Operation {
     next()
   }
 
+  resolvePostbackWithMenu = async (bot, messaging, context, next) => {
+    switch (messaging.postback.payload) {
+      case 'RESTART':
+        return next({ restart: true })
+    }
+
+    return this.resolvePostback(bot, messaging, context, next)
+  }
+
 
   resolveDefault = async (bot, messaging, context, next) => {
     // noop
@@ -62,7 +71,7 @@ export default class extends Operation {
       return this.resolveMessage(bot, messaging, context, next)
 
     if (messaging.postback)
-      return this.resolvePostback(bot, messaging, context, next)
+      return this.resolvePostbackWithMenu(bot, messaging, context, next)
 
     this.resolveDefault(bot, messaging, context, next)
   }
