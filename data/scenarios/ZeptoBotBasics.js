@@ -10,7 +10,7 @@ export default new Scenario({
     {
       type    : 'message',
       text    : `
-            This bot will help you to avoid common mistakes when dealing with publisher. Ready? Let's go. 
+            This bot will help you to avoid common mistakes when dealing with publisher. Ready? Let's go.
               `
     },
 
@@ -50,7 +50,7 @@ export default new Scenario({
     },
 
     {
-      label   : 'survey'
+      label   : 'survey',
       type    : 'message',
       text    : `
         Ok. Now let's take a small quiz.
