@@ -66,7 +66,7 @@ export default {
     },
     {
       content : `
-        Examples: if your USP graphics and special effects, focus on those. If you have original gameplay, make sure your prototype clearly shows it.
+        Examples: if your USP are graphics and special effects, focus on those. If you have original gameplay, make sure your prototype clearly shows it.
       `,
       id      : '205d20ed-f721-4ecc-b4a5-219a2a673796',
       tags    : ['english']

@@ -10,7 +10,7 @@ export default new Scenario({
     {
       type  : 'message',
       text  : `
-        Welcome to ZeptoLab Publishing Bot. This bot will help you to avoid common mistakes when dealing with publisher. Ready? Let's go.
+        Welcome to ZeptoLab Publishing Bot.
       `
     },
 
@@ -18,7 +18,7 @@ export default new Scenario({
       label : 'chooser',
       type  : 'message',
       text  : `
-        Now select a course that you would like to see.
+        Select a course that you would like to see.
       `
     },
 
