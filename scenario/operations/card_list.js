@@ -33,8 +33,9 @@ export default class extends Operation {
   constructor(config) {
     super(config)
 
-    this.tags   = config.tags
-    this.course = config.course
+    this.tags     = config.tags
+    this.course   = config.course
+    this.timeout  = config.timeout
 
     this.config = config
   }
@@ -51,6 +52,16 @@ export default class extends Operation {
         }
       })
     )
+
+
+  resolveTimeout = async (bot, messaging, context, next) => {
+    let step = this.next
+
+    if (this.timeout && this.timeout.hasOwnProperty('next'))
+      step = this.timeout.next
+
+    next({ next: step })
+  }
 
 
   resolveMessage = async (bot, messaging, context, next) => {
@@ -70,6 +81,9 @@ export default class extends Operation {
 
     this.selected_card = userState.getIn(['courses', this.course.id, 'selected_card'], EmptyMap)
     this.shown_cards = userState.getIn(['courses', this.course.id, 'shown_cards'], EmptyList)
+
+    if (messaging.timeout)
+      return this.resolveTimeout(bot, messaging, context, next)
 
     if (messaging.message)
       return this.resolveMessage(bot, messaging, context, next)

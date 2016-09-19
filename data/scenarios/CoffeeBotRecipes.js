@@ -47,7 +47,7 @@ export default new Scenario({
         next  : 'moka-pot-delay'
       }
     }),
-    
+
     new Operations['message']({
       label         : 'moka-pot-delay',
       text          : `Do you stil want to continue this course?`,
@@ -56,11 +56,11 @@ export default new Scenario({
 
     new Operations['input']({
       branch  : {
-        'Quit'     : 'exit',
-        'Continue' : 'moka pot',
+        'quit'     : 'exit',
+        'continue' : 'moka pot',
       }
     }),
-    
+
     new Operations['message']({
       label         : 'moka pot 404',
       text          : `This course has no cards.`,
@@ -91,8 +91,8 @@ export default new Scenario({
 
     new Operations['input']({
       branch  : {
-        'Quit'     : 'exit',
-        'Continue' : 'aeropress',
+        'quit'     : 'exit',
+        'continue' : 'aeropress',
       }
     }),
 

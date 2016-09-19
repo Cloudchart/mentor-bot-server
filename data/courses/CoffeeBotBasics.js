@@ -2,7 +2,7 @@ export default {
 
   id        : 'coffee-bot-basics',
   name      : 'Coffee Basics',
-  author    : 'Anton Outkine',
+  author    : 'Coffee Bot',
   scenario  : {
     id      : 'coffee-bot-basics',
     source  : 'local',
