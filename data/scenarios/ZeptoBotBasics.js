@@ -10,34 +10,34 @@ export default new Scenario({
     {
       type    : 'message',
       text    : `
-        This is a basic publishing course by Zeptolab.
-      `
+            This bot will help you to avoid common mistakes when dealing with publisher. Ready? Let's go. 
+              `
     },
 
-    {
-      label   : 'choose',
-      type    : 'message',
-      text    : `
-        Do you want to see the cards to skip to quiz?
-      `,
-      quick_replies : ['Cards', 'Quiz']
-    },
-
-    {
-      type    : 'input',
-      branch  : {
-        'cards' : 'cards',
-        'quiz'  : 'survey',
-      }
-    },
-
-    {
-      type    : 'message',
-      text    : `
-        Say what?
-      `,
-      next    : 'choose'
-    },
+    // {
+    //   label   : 'choose',
+    //   type    : 'message',
+    //   text    : `
+    //     Do you want to see the cards to skip to quiz?
+    //   `,
+    //   quick_replies : ['Cards', 'Quiz']
+    // },
+    //
+    // {
+    //   type    : 'input',
+    //   branch  : {
+    //     'cards' : 'cards',
+    //     'quiz'  : 'survey',
+    //   }
+    // },
+    //
+    // {
+    //   type    : 'message',
+    //   text    : `
+    //     Say what?
+    //   `,
+    //   next    : 'choose'
+    // },
 
     {
       label   : 'cards',
@@ -47,11 +47,17 @@ export default new Scenario({
         id      : 'zepto-bot-basics',
         source  : 'local'
       },
-      next    : 'exit'
     },
 
     {
-      label   : 'survey',
+      label   : 'survey'
+      type    : 'message',
+      text    : `
+        Ok. Now let's take a small quiz.
+      `
+    },
+
+    {
       type    : 'survey',
       survey  : {
         id      : 'zepto-survey',
