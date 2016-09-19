@@ -1,7 +1,7 @@
 export default {
 
   id      : 'zepto-bot-basics',
-  name    : 'Zeptolab Publishing Basics',
+  name    : 'Publishing Basics',
   author  : 'Zeptolab',
 
   scenario  : {
