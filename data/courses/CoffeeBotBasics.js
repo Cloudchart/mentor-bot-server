@@ -33,7 +33,7 @@ export default {
     {
       id      : 'a93ad23a-b803-4225-80c2-1bb459788935',
       content : `
-        Know where your coffee comes from. There’s usually a country of origin marked on the bag, but that’s not enough — ideally, you should find a region and the name of the producer as well.
+        Know where your coffee comes from. There’s usually a country of origin indicated on the bag, but that’s not enough — ideally, you should find a region and the name of the producer as well.
       `,
       tags    : ['buying']
     },
@@ -61,7 +61,7 @@ export default {
     {
       id      : '2f48f652-c1ca-403d-9014-e0788da68df5',
       content : `
-        For more info on specialty coffee and list of roasters and cafes, try the Third Wave Wichteln Facebook group.
+        For more info on specialty coffee and list of roasters and cafes, try the Third Wave Wichteln (https://www.facebook.com/groups/thirdwavewichteln) Facebook group.
       `,
       tags    : ['buying'],
       origin  : {
@@ -171,7 +171,7 @@ export default {
     },
 
     {
-      "content":"Experiment with the temperature if you use a filtration system. Try slightly increasing your coffee to water ratio — 8% coffee to 100% water, maybe a tad more. Then try the reverse. Change your brew time. Look for different recipes for your particular brewing method.",
+      "content":"Experiment with the temperature if you use a filtration system. Try slightly increasing your coffee to water ratio — 8% coffee to 100% water, maybe a little more. Then try the reverse. Change your brew time. Look for different recipes for your particular brewing method.",
       "id":"c3c9f19b-01c8-452f-96c5-32f71901ef4c",
       "tags":["brewing"]
     }

@@ -67,10 +67,7 @@ export default {
 
     {
       content : `
-        7. Brew coffee
-        The coffee will start to come out of the sprinkler in a few seconds — very fast! Don’t leave the kitchen as you would normally do with a moka pot.
-        In 20…30 seconds it will start spewing steam — now close the lid and immediately take the pot off the stove.
-        Rest 20 seconds, pour.
+        7. Brew coffee. Pour heated water evenly over the bloomed coffee. When you reach the mark (or the top, allow for 2–3 mm), stir again.
       `,
       id      : "7678a768-c74c-4917-9a20-4b60ddef7cd0",
       tags    : ["moka"]

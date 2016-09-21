@@ -12,15 +12,14 @@ export default new Scenario({
     new Operations['message']({
       text  : `
                 This course have these main parts:
-                How to choose and buy coffee,
-                coffee equipment and how to brew coffee.
+                How to choose and buy coffee, coffee equipment and how to brew coffee.
       `
     }),
 
     new Operations['message']({
       label         : 'first',
       text          : `
-        Would you like to read the first part, how to buy and choose coffee?
+        Would you like to go throught the first part, how to buy and choose coffee?
       `,
       quick_replies : ['No', 'Yes']
     }),
@@ -58,7 +57,7 @@ export default new Scenario({
     new Operations['message']({
       label         : 'second',
       text          : `
-        Would you like to read the second part, coffee equipment?
+        Would you like go through the second part, coffee equipment?
       `,
       quick_replies : ['No', 'Yes']
     }),
@@ -96,7 +95,7 @@ export default new Scenario({
     new Operations['message']({
       label         : 'third',
       text          : `
-        Would you like to read the third part, basic brewing?
+        Would you like go throught the third part, basic brewing?
       `,
       quick_replies : ['No', 'Yes']
     }),
@@ -128,7 +127,9 @@ export default new Scenario({
 
     new Operations['message']({
       label : 'end',
-      text  : `Ok, it seems now that you know the basics.`,
+      text  : `
+        Ok, it seems like you know the basics now.
+      `,
     }),
   ]
 

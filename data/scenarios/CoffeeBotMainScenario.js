@@ -20,7 +20,7 @@ export default new Scenario({
     {
       type  : 'message',
       text  : `
-        I can teach you a thing or two about a coffee and can provide you with some recipes.
+        I can teach you how to buy, grind and brew coffee and give you a couble of recipes.
       `
     },
 
@@ -28,7 +28,7 @@ export default new Scenario({
       label : 'chooser',
       type  : 'message',
       text  : `
-        Now select a course that you would like to see.
+        Now select a course.
       `
     },
 
