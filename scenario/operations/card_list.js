@@ -115,7 +115,7 @@ export default class extends InputOperation {
       : null
 
     if (course === null || course === undefined)
-      next({ next: this.branch['404'] })
+      return next({ next: this.branch['404'] })
 
     let shown_cards_ids = this.shown_cards.map(card => card.get('id'))
 

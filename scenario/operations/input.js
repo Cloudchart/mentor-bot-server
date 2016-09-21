@@ -25,7 +25,7 @@ export default class extends Operation {
     if (this.timeout && this.timeout.hasOwnProperty('next'))
       step = this.timeout.next
 
-    next({ next: step })
+    return next({ next: step })
   }
 
 
@@ -40,12 +40,12 @@ export default class extends Operation {
 
     await this.resolveSideEffect(bot, messaging, context, branch)
 
-    next({ next: branch })
+    return next({ next: branch })
   }
 
 
   resolvePostback = async (bot, messaging, context, next) => {
-    next()
+    return next()
   }
 
   resolvePostbackWithMenu = async (bot, messaging, context, next) => {
@@ -60,6 +60,7 @@ export default class extends Operation {
 
   resolveDefault = async (bot, messaging, context, next) => {
     // noop
+    return
   }
 
 
@@ -73,7 +74,7 @@ export default class extends Operation {
     if (messaging.postback)
       return this.resolvePostbackWithMenu(bot, messaging, context, next)
 
-    this.resolveDefault(bot, messaging, context, next)
+    return this.resolveDefault(bot, messaging, context, next)
   }
 
 
