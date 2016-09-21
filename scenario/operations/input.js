@@ -52,6 +52,9 @@ export default class extends Operation {
     switch (messaging.postback.payload) {
       case 'RESTART':
         return next({ restart: true })
+      case 'SAVED CARDS':
+        await bot.sendTextMessage(messaging.sender.id, `Not implemented.`)
+        return
     }
 
     return this.resolvePostback(bot, messaging, context, next)
