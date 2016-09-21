@@ -44,6 +44,7 @@ export default class extends InputOperation {
   prepare = async (bot, user) => {
     let userState = await ensureUserState(bot, user)
 
+    this.shown_hints    = userState.getIn(['shown_hints'], EmptyList)
     this.shown_cards    = userState.getIn(['courses', this.course.id, 'shown_cards'], EmptyList)
     this.selected_card  = userState.getIn(['courses', this.course.id, 'selected_card'], EmptyMap)
   }
@@ -52,7 +53,8 @@ export default class extends InputOperation {
   updateUserState = async (user) =>
     await run(
       Models.UserState.get(user.id).update({
-        courses: {
+        shown_hints : r.literal(this.shown_hints.toJS()),
+        courses     : {
           [this.course.id]: {
             shown_cards   : r.literal(this.shown_cards.toJS()),
             selected_card : r.literal(this.selected_card.toJS())
@@ -62,13 +64,42 @@ export default class extends InputOperation {
     )
 
 
+  getAnswer = (message) => {
+    if (message.quick_reply !== null && message.quick_reply !== undefined)
+      return message.quick_reply.payload
+
+    return message.text.trim().toLowerCase()
+  }
+
+
+  sendSaveHint = (bot, user) =>
+    bot.sendTextMessage(user.id, `This card is now saved. All saved cards are available in the menu.`)
+
+
+  sendSkipHint = (bot, user) =>
+    bot.sendTextMessage(user.id, `Ok, this card will not be saved to your collection and you can continue reading.`)
+
+
   resolveMessage = async (bot, messaging, context, next) => {
     await this.prepare(bot, messaging.sender)
 
     this.shown_cards = this.selected_card.equals(EmptyMap)
       ? EmptyList
       : this.shown_cards.push(this.selected_card)
+
     this.selected_card = EmptyMap
+
+    let answer = this.getAnswer(messaging.message)
+
+    if (answer === 'save' && !this.shown_hints.contains('card_save')) {
+      await this.sendSaveHint(bot, messaging.sender)
+      this.shown_hints = this.shown_hints.push('card_save')
+    }
+
+    if (answer === 'got it' && !this.shown_hints.contains('card_skip')) {
+      await this.sendSkipHint(bot, messaging.sender)
+      this.shown_hints = this.shown_hints.push('card_skip')
+    }
 
     await this.updateUserState(messaging.sender)
 
