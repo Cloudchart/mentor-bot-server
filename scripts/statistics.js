@@ -28,8 +28,8 @@ const process_record = (error, record) => {
     let course_complete = record_data.shown_cards.length === 0
     ensure_course(course_id)
     Object.keys(data[course_id]).forEach(card_id => {
-      let is_saved  = !!record_data.saved_cards.find(({ id }) => id === card_id)
-      let is_shown  = !!record_data.shown_cards.find(({ id }) => id === card_id)
+      let is_saved  = !!(record_data.saved_cards || []).find(({ id }) => id === card_id)
+      let is_shown  = !!(record_data.shown_cards || []).find(({ id }) => id === card_id)
       data[course_id][card_id][record.id] = is_saved
         ? 'save'
         : is_shown
