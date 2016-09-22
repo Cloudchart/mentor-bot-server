@@ -13,16 +13,17 @@ export default new Scenario({
     new Operations['message']({
       label : 'start',
       text  : `
-        Currently I can only guide you on two recipes, it's Moka pot and Aeropress.
-        Which one you're interested in?
+        Пока что я знаю только о четырёх методах приготовления кофе: Кемекс / Харио, Аэропресс, Гейзерная кофеварка и Френчпресс (без нажатия)
       `,
-      quick_replies:  ['Moka pot', 'Aeropress']
+      quick_replies:  ['Кемекс', 'Аэропресс', 'Гейзер', 'Френчпресс']
     }),
 
     new Operations['input']({
       branch  : {
-        'moka pot'  : 'moka pot',
-        'aeropress' : 'aeropress',
+        'Гейзер'     : 'moka pot',
+        'Аэропресс'  : 'aeropress',
+        'Кемекс'     : 'chemex',
+        'Френчпресс' : 'frenchpress',
       }
     }),
 
@@ -33,7 +34,7 @@ export default new Scenario({
 
     new Operations['card-list']({
       label   : 'moka pot',
-      tags    : ['moka'],
+      tags    : ['moka_russian'],
       next    : 'end',
       course  : {
         id      : 'coffee-bot-recipes',
@@ -50,25 +51,101 @@ export default new Scenario({
 
     new Operations['message']({
       label         : 'moka-pot-delay',
-      text          : `Do you stil want to continue this course?`,
-      quick_replies : ['Quit', 'Continue']
+      text          : `Вы ещё готовите или уже забросили?`,
+      quick_replies : ['Забросил', 'Готовлю']
     }),
 
     new Operations['input']({
       branch  : {
-        'quit'     : 'exit',
-        'continue' : 'moka pot',
+        'Забросил'     : 'exit',
+        'Готовлю' : 'moka pot',
       }
     }),
 
     new Operations['message']({
       label         : 'moka pot 404',
       text          : `This course has no cards.`,
+      next          : 'end'
     }),
+    
+
+    new Operations['card-list']({
+      label   : 'chemex',
+      tags    : ['chemex_russian'],
+      next    : 'end',
+      course  : {
+        id      : 'coffee-bot-recipes',
+        source  : 'local',
+      },
+      branch  : {
+        '404' : 'chemex 404',
+      },
+      timeout : {
+        delay : 60 * 2 * 1000,
+        next  : 'chemex-delay'
+      }
+    }),
+
+    new Operations['message']({
+      label         : 'chemex-delay',
+      text          : `Вы ещё готовите или уже забросили?`,
+      quick_replies : ['Забросил', 'Готовлю']
+    }),
+
+    new Operations['input']({
+      branch  : {
+        'Забросил'     : 'exit',
+        'Готовлю' : 'chemex',
+      }
+    }),
+
+    new Operations['message']({
+      label         : 'chemex 404',
+      text          : `This course has no cards.`,
+      next          : 'end'
+    }),    
+
+
+    new Operations['card-list']({
+      label   : 'frenchpress',
+      tags    : ['frenchpress_russian'],
+      next    : 'end',
+      course  : {
+        id      : 'coffee-bot-recipes',
+        source  : 'local',
+      },
+      branch  : {
+        '404' : 'frenchpress 404',
+      },
+      timeout : {
+        delay : 60 * 2 * 1000,
+        next  : 'frenchpress-delay'
+      }
+    }),
+
+    new Operations['message']({
+      label         : 'frenchpress-delay',
+      text          : `Вы ещё готовите или уже забросили?`,
+      quick_replies : ['Забросил', 'Готовлю']
+    }),
+
+    new Operations['input']({
+      branch  : {
+        'Забросил'     : 'exit',
+        'Готовлю' : 'frenchpress',
+      }
+    }),
+
+    new Operations['message']({
+      label         : 'frenchpress 404',
+      text          : `This course has no cards.`,
+      next          : 'end'
+    }),
+    
 
     new Operations['card-list']({
       label   : 'aeropress',
-      tags    : ['aeropress'],
+      tags    : ['aeropress_russian'],
       next    : 'end',
       course  : {
         id      : 'coffee-bot-recipes',
@@ -85,14 +162,14 @@ export default new Scenario({
 
     new Operations['message']({
       label         : 'aeropress-delay',
-      text          : `Do you stil want to continue this course?`,
-      quick_replies : ['Quit', 'Continue']
+      text          : `Вы ещё готовите или уже забросили?`,
+      quick_replies : ['Забросил', 'Готовлю']
     }),
 
     new Operations['input']({
       branch  : {
-        'quit'     : 'exit',
-        'continue' : 'aeropress',
+        'Забросил'     : 'exit',
+        'Готовлю' : 'aeropress',
       }
     }),
 
@@ -100,11 +177,12 @@ export default new Scenario({
     new Operations['message']({
       label         : 'aeropress 404',
       text          : `This course has no cards.`,
+      next          : 'end'
     }),
 
     new Operations['message']({
       label   : 'end',
-      text    : 'Now enjoy your coffee!',
+      text    : 'Наслаждайтесь вашим кофе!',
     }),
 
 

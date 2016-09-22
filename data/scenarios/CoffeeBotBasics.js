@@ -8,26 +8,19 @@ export default new Scenario({
 
   id: 'coffee-bot-basics',
 
-  operations: [
-    new Operations['message']({
-      text  : `
-                This course have these main parts:
-                How to choose and buy coffee, coffee equipment and how to brew coffee.
-      `
-    }),
-
+   operations: [
     new Operations['message']({
       label         : 'first',
       text          : `
-        Would you like to go throught the first part, how to buy and choose coffee?
+        Этот курс содержит три основных блока: выбор зёрен, правильного кофейного оборудования и как делать кофе. Хотите пройти первую часть курса, про выбор зёрен?
       `,
-      quick_replies : ['No', 'Yes']
+      quick_replies : ['Нет', 'Да']
     }),
 
     new Operations['input']({
       branch  : {
-        'yes' : 'first-yes',
-        'no'  : 'second'
+        'Да' : 'first-yes',
+        'Нет'  : 'second'
       }
     }),
 
@@ -38,7 +31,7 @@ export default new Scenario({
 
     new Operations['card-list']({
       label   : 'first-yes',
-      tags    : ['buying'],
+      tags    : ['buying_russian'],
       next    : 'second',
       course  : {
         id      : 'coffee-bot-basics',
@@ -57,15 +50,15 @@ export default new Scenario({
     new Operations['message']({
       label         : 'second',
       text          : `
-        Would you like go through the second part, coffee equipment?
+        Хотите пройти вторую часть курса, посвященную кофейному оборудованию?
       `,
-      quick_replies : ['No', 'Yes']
+      quick_replies : ['Нет', 'Да']
     }),
 
     new Operations['input']({
       branch  : {
-        'yes' : 'second-yes',
-        'no'  : 'third'
+        'Да' : 'second-yes',
+        'Нет'  : 'third'
       }
     }),
 
@@ -76,7 +69,7 @@ export default new Scenario({
 
     new Operations['card-list']({
       label   : 'second-yes',
-      tags    : ['grinder'],
+      tags    : ['equipment_russian'],
       next    : 'third',
       course  : {
         id      : 'coffee-bot-basics',
@@ -95,15 +88,15 @@ export default new Scenario({
     new Operations['message']({
       label         : 'third',
       text          : `
-        Would you like go throught the third part, basic brewing?
+        Хотите пройти третью чусть курса, посвященную основам варки?
       `,
-      quick_replies : ['No', 'Yes']
+      quick_replies : ['Нет', 'Да']
     }),
 
     new Operations['input']({
       branch  : {
-        'yes' : 'third-yes',
-        'no'  : 'end'
+        'Да' : 'third-yes',
+        'Нет'  : 'end'
       }
     }),
 
@@ -114,7 +107,7 @@ export default new Scenario({
 
     new Operations['card-list']({
       label   : 'third-yes',
-      tags    : ['brewing'],
+      tags    : ['brewing_russian'],
       next    : 'end',
       course  : {
         id      : 'coffee-bot-basics',
@@ -128,7 +121,7 @@ export default new Scenario({
     new Operations['message']({
       label : 'end',
       text  : `
-        Ok, it seems like you know the basics now.
+        Похоже, теперь вы знаете основы.
       `,
     }),
   ]
