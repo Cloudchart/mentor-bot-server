@@ -46,6 +46,7 @@ export default class extends InputOperation {
 
     this.shown_hints    = userState.getIn(['shown_hints'], EmptyList)
     this.shown_cards    = userState.getIn(['courses', this.course.id, 'shown_cards'], EmptyList)
+    this.saved_cards    = userState.getIn(['courses', this.course.id, 'saved_cards'], EmptyList)
     this.selected_card  = userState.getIn(['courses', this.course.id, 'selected_card'], EmptyMap)
   }
 
@@ -57,6 +58,7 @@ export default class extends InputOperation {
         courses     : {
           [this.course.id]: {
             shown_cards   : r.literal(this.shown_cards.toJS()),
+            saved_cards   : r.literal(this.saved_cards.toJS()),
             selected_card : r.literal(this.selected_card.toJS())
           }
         }
@@ -87,8 +89,6 @@ export default class extends InputOperation {
       ? EmptyList
       : this.shown_cards.push(this.selected_card)
 
-    this.selected_card = EmptyMap
-
     let answer = this.getAnswer(messaging.message)
 
     if (answer === 'save' && !this.shown_hints.contains('card_save')) {
@@ -100,6 +100,13 @@ export default class extends InputOperation {
       await this.sendSkipHint(bot, messaging.sender)
       this.shown_hints = this.shown_hints.push('card_skip')
     }
+
+    if (answer === 'save') {
+      if (!this.saved_cards.find(card => card.get('id') === this.selected_card.get('id')))
+        this.saved_cards = this.saved_cards.push(this.selected_card)
+    }
+
+    this.selected_card = EmptyMap
 
     await this.updateUserState(messaging.sender)
 
