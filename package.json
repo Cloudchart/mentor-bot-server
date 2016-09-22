@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Mentor Bot Server",
   "scripts": {
-    "bot": "node bin/bot"
+    "bot": "node bin/bot",
+    "statistics": "node bin/statistics"
   },
   "author": "Eugene Kovalev",
   "license": "ISC",
