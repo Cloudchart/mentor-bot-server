@@ -4,7 +4,16 @@ class Operation {
     this.id     = config.id
     this.label  = config.label
     this.next   = config.next
-    this.branch = config.branch
+    this.config = config
+    this.resolveBranch()
+  }
+
+  resolveBranch = () => {
+    let branch = this.config.branch || {}
+    this.branch = Object.keys(branch).reduce((memo, key) => {
+      memo[key.toString().trim().toLowerCase()] = branch[key]
+      return memo
+    }, {})
   }
 
 }
