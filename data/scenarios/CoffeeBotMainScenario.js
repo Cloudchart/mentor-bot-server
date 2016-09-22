@@ -13,23 +13,23 @@ export default new Scenario({
     {
       type  : 'message',
       text  : `
-        This Coffeebot is powered by Mentorbot. Find more mentorbots and create your own at getmentorbot.com
-      `
+Кофебот создан с помощью сервиса Mentorbot. Образовательные боты по другим темам, а также возможность создать своего собственного бота - на getmentorbot.com
+              `
     },
 
     {
       type  : 'message',
       text  : `
-        I can teach you how to buy, grind and brew coffee and give you a couble of recipes.
-      `
+Привет, я Кофебот! Я расскажу о выборе и помоле кофе, основах приготовления, а также дам несколько рецептов.
+              `
     },
 
     {
       label : 'chooser',
       type  : 'message',
       text  : `
-        Now select a course.
-      `
+А теперь выберите курс
+              `
     },
 
     {
@@ -59,16 +59,16 @@ export default new Scenario({
       label : 'course-chooser-delay',
       type  : 'message',
       text  : `
-        Do you want to continue or just exit?
+        Вы хотите продолжить или выходим?
       `,
-      quick_replies: ['Quit', 'Continue']
+      quick_replies: ['Выходим', 'Продолжить']
     },
 
     {
       type      : 'input',
       branch    : {
-        'quit'      : 'exit',
-        'continue'  : 'course-chooser',
+        'Выходим'      : 'exit',
+        'Продолжить'  : 'course-chooser',
       }
     },
 
@@ -77,7 +77,7 @@ export default new Scenario({
       label : 'finish',
       next  : 'chooser',
       text  : `
-        Ok, you've finished this course.
+        Ок, вы завершили этот курс.
       `
     },
 
