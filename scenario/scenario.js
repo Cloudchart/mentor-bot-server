@@ -25,12 +25,12 @@ type ScenarioConfig = {
 
 class Scenario {
 
-  // id          : string
-  // operations  : Array<any>
-  // config      : any
-  // valid       : boolean
+  id          : string
+  operations  : Array<any>
+  config      : any
+  valid       : boolean
 
-  constructor({ id, operations, ...config }) {
+  constructor({ id, operations, ...config} : ScenarioConfig) {
     this.id         = id
     this.operations = operations
     this.config     = config
