@@ -9,7 +9,7 @@ let callbacks = {}
 
 const ensureUser = async (bot, user_id) => {
   let global_id = 'messenger:' + user_id
-  let user = await Models.User.load(global_id).catch(null)
+  let user = await Models.User.load(global_id).catch(error => null)
 
   if (user === null) {
     Models.User.clear(global_id)
