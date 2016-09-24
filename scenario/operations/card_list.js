@@ -17,9 +17,9 @@ const ensureUserState = async (bot, user) => {
       record =>
         r.branch(record.ne(null), null, Models.UserState.insert({ id: user.id }))
     )
-  )
+  ).catch(console.error)
 
-  return await Models.UserState.load(user.id)
+  return Immutable.fromJS(await Models.UserState.load(user.id))
 }
 
 let EmptyMap = new Immutable.Map
