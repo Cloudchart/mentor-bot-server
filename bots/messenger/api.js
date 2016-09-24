@@ -2,6 +2,17 @@ import fetch from 'node-fetch'
 import qs from 'querystring'
 
 
+const getUserProfile = (access_token, user_id) =>
+  api({
+    access_token,
+    method  : 'GET',
+    path    : user_id,
+    query   : {
+      fields  : ['first_name', 'last_name', 'profile_pic', 'locale', 'timezone', 'gender'].join(',')
+    }
+  })
+
+
 const sendTextMessage = (access_token, recipient_id, message_text) =>
   api({
     access_token,
@@ -137,6 +148,9 @@ const api = ({
 
 export default {
   api,
+
+  getUserProfile,
+
   sendTextMessage,
   sendQuickReply,
   sendAttachment,

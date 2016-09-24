@@ -51,6 +51,10 @@ class Bot {
   }
 
 
+  getUserProfile = (user_id) =>
+    FB.getUserProfile(this.get('access_token'), user_id)
+
+
   sendCourseList = (recipient_id, courses) =>
     this.sendGenericMessage(
       recipient_id,

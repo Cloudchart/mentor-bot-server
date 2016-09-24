@@ -1,4 +1,4 @@
-import { r, run } from '../../db'
+import { r, run, Models } from '../../db'
 import Bot from './bot'
 
 
@@ -7,6 +7,26 @@ const KnownMessagingTypes = ['message', 'delivery', 'read', 'postback']
 let callbacks = {}
 
 
+const ensureUser = async (bot, user_id) => {
+  let global_id = 'messenger:' + user_id
+  let user = await Models.User.load(global_id).catch(null)
+
+  if (user === null) {
+    Models.User.clear(global_id)
+
+    let profile = await bot.getUserProfile(user_id)
+    await run(
+      Models.User.insert({
+        ...profile,
+        id: global_id
+      })
+    )
+
+    user = await Models.User.load(global_id)
+  }
+
+  return user
+}
 
 
 const handleUpdate = ({ new_val, old_val }) => {
@@ -14,11 +34,16 @@ const handleUpdate = ({ new_val, old_val }) => {
 
   const bot = new Bot(attributes)
 
-  messaging.forEach(messaging => {
+  messaging.forEach(async messaging => {
     let messagingType = KnownMessagingTypes.find(name => messaging.hasOwnProperty(name))
 
     if (!messagingType)
       console.error(`Unrecognizable messaging: ${JSON.stringify(messaging, null, 2)}`)
+
+    if (messaging.message && messaging.message.is_echo === true)
+      return
+
+    let user = await ensureUser(bot, messaging.sender.id)
 
     callbacks[messagingType] && callbacks[messagingType].forEach(callback => callback({ bot, messaging }))
   })
