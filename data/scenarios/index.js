@@ -1,4 +1,4 @@
-import CoffeeBotMainScenario from './CoffeeBotMainScenario'
+// import CoffeeBotMainScenario from './CoffeeBotMainScenario'
 // import CoffeeBotMainEn from './CoffeeBotMainEn'
 
 import CoffeeBotRecipes from './CoffeeBotRecipes'
@@ -9,7 +9,7 @@ import ZeptoBotBasics from './ZeptoBotBasics'
 
 const Scenarios = [
 
-  CoffeeBotMainScenario,
+  // CoffeeBotMainScenario,
   // CoffeeBotMainEn,
 
   CoffeeBotRecipes,

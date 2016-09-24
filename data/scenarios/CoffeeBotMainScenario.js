@@ -14,68 +14,68 @@ export default new Scenario({
       `
     },
 
-    // {
-    //   type  : 'message',
-    //   text  : `
-    //     Привет, я Кофебот! Я расскажу о выборе и помоле кофе, основах приготовления, а также дам несколько рецептов.
-    //   `
-    // },
-    //
-    // {
-    //   label : 'chooser',
-    //   type  : 'message',
-    //   text  : `
-    //     А теперь выберите курс
-    //   `
-    // },
-    //
-    // {
-    //   label   : 'course-chooser',
-    //   type    : 'course-chooser',
-    //   next    : 'finish',
-    //   branch  : {
-    //     '404' : '404'
-    //   },
-    //   timeout : {
-    //     delay : 60 * 60 * 1000,
-    //     next  : 'course-chooser-delay'
-    //   }
-    // },
-    //
-    // {
-    //   type  : 'message',
-    //   label : '404',
-    //   text  : `
-    //     Не понимаю.
-    //   `,
-    //   next  : 'chooser',
-    // },
-    //
-    // {
-    //   label : 'course-chooser-delay',
-    //   type  : 'message',
-    //   text  : `
-    //     Вы хотите продолжить или выходим?
-    //   `,
-    //   quick_replies: ['Выходим', 'Продолжить']
-    // },
-    //
-    // {
-    //   type      : 'input',
-    //   branch    : {
-    //     'Выходим'     : 'exit',
-    //     'Продолжить'  : 'course-chooser',
-    //   }
-    // },
-    //
-    // {
-    //   type  : 'message',
-    //   label : 'finish',
-    //   next  : 'chooser',
-    //   text  : `
-    //     Ок, вы завершили этот курс.
-    //   `
-    // },
+    {
+      type  : 'message',
+      text  : `
+        Привет, я Кофебот! Я расскажу о выборе и помоле кофе, основах приготовления, а также дам несколько рецептов.
+      `
+    },
+
+    {
+      label : 'chooser',
+      type  : 'message',
+      text  : `
+        А теперь выберите курс
+      `
+    },
+
+    {
+      label   : 'course-chooser',
+      type    : 'course-chooser',
+      next    : 'finish',
+      branch  : {
+        '404' : '404'
+      },
+      timeout : {
+        delay : 60 * 60 * 1000,
+        next  : 'course-chooser-delay'
+      }
+    },
+
+    {
+      type  : 'message',
+      label : '404',
+      text  : `
+        Не понимаю.
+      `,
+      next  : 'chooser',
+    },
+
+    {
+      label : 'course-chooser-delay',
+      type  : 'message',
+      text  : `
+        Вы хотите продолжить или выходим?
+      `,
+      quick_replies: ['Выходим', 'Продолжить']
+    },
+
+    {
+      type      : 'input',
+      branch    : {
+        'Выходим'     : 'exit',
+        'Продолжить'  : 'course-chooser',
+      }
+    },
+
+    {
+      type  : 'message',
+      label : 'finish',
+      next  : 'chooser',
+      text  : `
+        Ок, вы завершили этот курс.
+      `
+    },
 
   ]
 

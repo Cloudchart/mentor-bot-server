@@ -30,7 +30,7 @@ class Scenario {
   config      : any
   valid       : boolean
 
-  constructor({ id, operations, ...config} : ScenarioConfig) {
+  constructor({ id, operations, ...config } : ScenarioConfig) {
     this.id         = id
     this.operations = operations
     this.config     = config
