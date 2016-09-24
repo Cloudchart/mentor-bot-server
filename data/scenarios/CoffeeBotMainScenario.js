@@ -1,7 +1,4 @@
-import {
-  Scenario,
-  Operations,
-} from '../../scenario'
+import { Scenario } from '../../scenario'
 
 
 export default new Scenario({
@@ -13,23 +10,23 @@ export default new Scenario({
     {
       type  : 'message',
       text  : `
-Кофебот создан с помощью сервиса Mentorbot. Образовательные боты по другим темам, а также возможность создать своего собственного бота - на getmentorbot.com
-              `
+        Кофебот создан с помощью сервиса Mentorbot. Образовательные боты по другим темам, а также возможность создать своего собственного бота - на getmentorbot.com
+      `
     },
 
     {
       type  : 'message',
       text  : `
-Привет, я Кофебот! Я расскажу о выборе и помоле кофе, основах приготовления, а также дам несколько рецептов.
-              `
+        Привет, я Кофебот! Я расскажу о выборе и помоле кофе, основах приготовления, а также дам несколько рецептов.
+      `
     },
 
     {
       label : 'chooser',
       type  : 'message',
       text  : `
-А теперь выберите курс
-              `
+        А теперь выберите курс
+      `
     },
 
     {
@@ -37,8 +34,7 @@ export default new Scenario({
       type    : 'course-chooser',
       next    : 'finish',
       branch  : {
-        'empty' : 'no courses',
-        '404'   : '404'
+        '404' : '404'
       },
       timeout : {
         delay : 60 * 60 * 1000,
@@ -49,10 +45,10 @@ export default new Scenario({
     {
       type  : 'message',
       label : '404',
-      next  : 'chooser',
       text  : `
-        I don't get it.
-      `
+        Не понимаю.
+      `,
+      next  : 'chooser',
     },
 
     {
@@ -67,7 +63,7 @@ export default new Scenario({
     {
       type      : 'input',
       branch    : {
-        'Выходим'      : 'exit',
+        'Выходим'     : 'exit',
         'Продолжить'  : 'course-chooser',
       }
     },
@@ -80,14 +76,6 @@ export default new Scenario({
         Ок, вы завершили этот курс.
       `
     },
-
-    {
-      type  : 'message',
-      label : 'no courses',
-      text  : `
-        This bot has no courses yes.
-      `
-    }
 
   ]
 
