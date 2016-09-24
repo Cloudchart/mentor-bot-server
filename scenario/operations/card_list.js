@@ -26,6 +26,13 @@ let EmptyMap = new Immutable.Map
 let EmptyList = new Immutable.List
 
 
+const DEFAULTS = {
+  skip_button_label : `Got it`,
+  save_button_label : `Save`,
+  skip_button_hint  : `Ok, since this makes sense, let's continue.`,
+  save_button_hint  : `This card is now saved. All saved cards are available in the menu.`
+}
+
 export default class extends InputOperation {
 
   static type = 'card-list';
@@ -36,6 +43,12 @@ export default class extends InputOperation {
     this.tags     = config.tags
     this.course   = config.course
     this.timeout  = config.timeout
+
+    this.skip_button_label = config.skip_button_label || DEFAULTS.skip_button_label
+    this.save_button_label = config.save_button_label || DEFAULTS.save_button_label
+
+    this.skip_button_hint = config.skip_button_hint || DEFAULTS.skip_button_hint
+    this.save_button_hint = config.save_button_hint || DEFAULTS.save_button_hint
 
     this.config = config
   }
@@ -70,16 +83,24 @@ export default class extends InputOperation {
     if (message.quick_reply !== null && message.quick_reply !== undefined)
       return message.quick_reply.payload
 
-    return message.text.trim().toLowerCase()
+    let query = message.text.trim().toLowerCase()
+
+    if (query === this.skip_button_label.toLowerCase())
+      return 'skip'
+
+    if (query === this.save_button_label.toLowerCase())
+      return 'save'
+
+    return false
   }
 
 
   sendSaveHint = (bot, user) =>
-    bot.sendTextMessage(user.id, `This card is now saved. All saved cards are available in the menu.`)
+    bot.sendTextMessage(user.id, this.save_button_hint)
 
 
   sendSkipHint = (bot, user) =>
-    bot.sendTextMessage(user.id, `Ok, this card will not be saved to your collection and you can continue reading.`)
+    bot.sendTextMessage(user.id, this.skip_button_hint)
 
 
   resolveMessage = async (bot, messaging, context, next) => {
@@ -91,12 +112,15 @@ export default class extends InputOperation {
 
     let answer = this.getAnswer(messaging.message)
 
+    if (!answer)
+      return next({ next: this.index })
+
     if (answer === 'save' && !this.shown_hints.contains('card_save')) {
       await this.sendSaveHint(bot, messaging.sender)
       this.shown_hints = this.shown_hints.push('card_save')
     }
 
-    if (answer === 'got it' && !this.shown_hints.contains('card_skip')) {
+    if (answer === 'skip' && !this.shown_hints.contains('card_skip')) {
       await this.sendSkipHint(bot, messaging.sender)
       this.shown_hints = this.shown_hints.push('card_skip')
     }
@@ -110,7 +134,7 @@ export default class extends InputOperation {
 
     await this.updateUserState(messaging.sender)
 
-    next({ next: this.index })
+    return next({ next: this.index })
   }
 
 
@@ -163,11 +187,11 @@ export default class extends InputOperation {
     let quick_replies = [
       {
         content_type  : 'text',
-        title         : 'Got it',
-        payload       : 'got it',
+        title         : this.skip_button_label,
+        payload       : 'skip',
       }, {
         content_type  : 'text',
-        title         : 'Save',
+        title         : this.save_button_label,
         payload       : 'save',
       }
     ]

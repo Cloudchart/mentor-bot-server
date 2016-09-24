@@ -59,7 +59,8 @@ export default new Scenario({
       branch    : {
         'Quit'      : 'exit',
         'Continue'  : 'course-chooser',
-      }
+      },
+      next      : 'course-chooser-delay',
     },
 
     {
