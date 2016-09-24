@@ -1,8 +1,7 @@
 import { Scenario } from '../../scenario'
 
-console.log(Scenario)
 
-export default new Scenario({
+const CoffeeBotMain = new Scenario({
 
   id: 'coffee-bot-main',
 
@@ -81,3 +80,6 @@ export default new Scenario({
   ]
 
 })
+
+
+export default CoffeeBotMain
