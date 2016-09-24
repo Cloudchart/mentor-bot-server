@@ -1,5 +1,6 @@
 import { Scenario } from '../../scenario'
 
+console.log(Scenario)
 
 export default new Scenario({
 
