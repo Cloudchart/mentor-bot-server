@@ -41,8 +41,12 @@ export default (modelConfig: ModelConfig) => {
   const dataLoader = new DataLoader((ids: Array<string>) => {
     return run(Table.getAll(...ids))
       .then(cursor => cursor.toArray())
-      .then(records => records.sort(compareRecords(ids)))
-      .then(records => records.map(record => fromJS(record)))
+      .then(
+        records =>
+          ids.map(id => records.find(record => record.id === id) || new Error('Not found.'))
+      )
+      // .then(records => records.sort(compareRecords(ids)))
+      // .then(records => records.map(record => fromJS(record)))
   })
 
   const load      = (id)  => dataLoader.load(id)
