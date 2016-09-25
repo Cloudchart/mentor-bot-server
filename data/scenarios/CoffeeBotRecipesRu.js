@@ -31,7 +31,7 @@ export default new Scenario({
 
     {
       type    : 'message',
-      text    : `Сейчас не понял. Повторите, пожалуйста.`,
+      text    : `Выберите один из вариантов.`,
       next    : 'start',
     },
 

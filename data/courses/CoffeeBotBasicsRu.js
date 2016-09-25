@@ -1,7 +1,7 @@
 export default {
 
   id        : 'coffee-bot-basics-ru',
-  name      : 'Coffee Basics',
+  name      : 'Самое важное',
   author    : 'Coffee Bot',
   scenario  : {
     id      : 'coffee-bot-basics-ru',
