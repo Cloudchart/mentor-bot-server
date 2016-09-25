@@ -35,10 +35,10 @@ export default new Scenario({
       branch  : {
         '404' : '404',
       },
-      timeout : {
-        delay : 60 * 60 * 1000,
-        next  : 'course-chooser-delay'
-      },
+      // timeout : {
+      //   delay : 60 * 60 * 1000,
+      //   next  : 'course-chooser-delay'
+      // },
       next    : 'finish',
     },
 
