@@ -37,10 +37,10 @@ const handleUpdate = ({ new_val, old_val }) => {
   messaging.forEach(async messaging => {
     let messagingType = KnownMessagingTypes.find(name => messaging.hasOwnProperty(name))
 
+    console.log(JSON.stringify(messaging, null, 2))
+
     if (!messagingType)
       console.error(`Unrecognizable messaging: ${JSON.stringify(messaging, null, 2)}`)
-
-    console.log(JSON.stringify(messaging, null, 2))
 
     if (messaging.message && messaging.message.is_echo === true)
       return
