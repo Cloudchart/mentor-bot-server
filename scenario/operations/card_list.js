@@ -198,7 +198,14 @@ export default class extends InputOperation {
 
     let content = card.content.trim().replace(/\n\s+/g, '\n')
 
-    await bot.sendQuickReply(messaging.sender.id, content.length > 317 ? content.substring(0, 317) + '...' : content , quick_replies)
+    while (content.length > 320) {
+      let first = content.substr(0, 320)
+      first = first.substr(0, Math.min(first.length, first.lastIndexOf(' ')))
+      content = content.substr(first.length)
+      await bot.sendTextMessage(messaging.sender.id, first)
+    }
+
+    await bot.sendQuickReply(messaging.sender.id, content.trim(), quick_replies)
 
   }
 
