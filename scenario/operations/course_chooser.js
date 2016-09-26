@@ -1,3 +1,4 @@
+import GA from '../../google'
 import Immutable from 'immutable'
 import InputOperation from './input'
 // import Operation from '../operation'
@@ -48,6 +49,14 @@ export default class extends InputOperation {
       return next()
     }
 
+    await GA.collect_event({
+      user        : messaging.sender.id,
+      category    : 'course-chooser',
+      action      : 'course-select',
+      label       : course.name,
+      interactive : true
+    })
+
     next({ scenario: course.scenario })
   }
 
@@ -73,6 +82,13 @@ export default class extends InputOperation {
 
     if (courses.length === 0)
       return next({ next: this.branch['empty'] })
+
+    await GA.collect_event({
+      user      : messaging.sender.id,
+      category  : 'course-chooser',
+      action    : 'course-chooser-start',
+      label     : courses.map(({ name }) => name).join(',')
+    })
 
     await bot.sendCourseList(messaging.sender.id, courses)
   }

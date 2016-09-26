@@ -1,3 +1,4 @@
+import GA from '../../google'
 import Immutable from 'immutable'
 import InputOperation from './input'
 
@@ -111,6 +112,10 @@ export default class extends InputOperation {
       : this.shown_cards.push(this.selected_card)
 
     let answer = this.getAnswer(messaging.message)
+    let course = this.course.source === 'local'
+      ? Courses[this.course.id]
+      : null
+    let card = course.cards.find(({ id }) => id === this.selected_card.get('id'))
 
     if (!answer)
       return next({ next: this.index })
@@ -126,9 +131,27 @@ export default class extends InputOperation {
     }
 
     if (answer === 'save') {
+      await GA.collect_event({
+        user        : messaging.sender.id,
+        category    : 'card-list',
+        action      : 'card-save',
+        label       : card.content.substr(0, 250),
+        ineractive  : true
+      })
+
       if (!this.saved_cards.find(card => card.get('id') === this.selected_card.get('id')))
         this.saved_cards = this.saved_cards.push(this.selected_card)
     }
+
+    if (answer === 'skip')
+      await GA.collect_event({
+        user        : messaging.sender.id,
+        category    : 'card-list',
+        action      : 'card-skip',
+        label       : card.content.substr(0, 250),
+        ineractive  : true
+      })
+
 
     this.selected_card = EmptyMap
 
@@ -163,8 +186,23 @@ export default class extends InputOperation {
 
       await this.updateUserState(messaging.sender)
 
+      await GA.collect_event({
+        user        : messaging.sender.id,
+        category    : 'card-list',
+        action      : 'card-list-finish',
+        label       : this.tags.join(','),
+      })
+
       return next()
     }
+
+    if (this.shown_cards.size === 0)
+      await GA.collect_event({
+        user        : messaging.sender.id,
+        category    : 'card-list',
+        action      : 'card-list-start',
+        label       : this.tags.join(','),
+      })
 
     this.selected_card = new Immutable.Map({ id: card.id })
 
@@ -197,6 +235,13 @@ export default class extends InputOperation {
     ]
 
     let content = card.content.trim().replace(/\n\s+/g, '\n')
+
+    await GA.collect_event({
+      user        : messaging.sender.id,
+      category    : 'card-list',
+      action      : 'show',
+      label       : content,
+    })
 
     while (content.length > 320) {
       let first = content.substr(0, 320)

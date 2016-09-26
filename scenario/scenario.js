@@ -1,5 +1,6 @@
 // @flow
 
+import GA from '../google'
 import Operation from './operation'
 import Operations from './operations'
 
@@ -48,8 +49,11 @@ class Scenario {
 
       let { type, ...attributes } = operationConfig
 
-      if (Operations[type])
-        return new Operations[type](attributes)
+      if (Operations[type]) {
+        let operation = new Operations[type](attributes)
+        operation.scenario = this
+        return operation
+      }
 
       valid = false
     })
@@ -67,6 +71,8 @@ class Scenario {
 
       return memo
     }, {})
+
+    this.labels = labels
 
     this.operations.forEach(operation => {
       if (operation.next === null || operation.next === undefined) {
@@ -140,11 +146,24 @@ class Scenario {
     let operation_index = context.next || 0
     let operation       = this.operations[operation_index]
 
+    if (operation_index === 0)
+      await GA.collect_screen({
+        user        : messaging.sender.id,
+        app_name    : bot.get('name'),
+        content     : this.id,
+      })
+
     // Return up one level or start from the beginning
     if (context.next === -1 || operation === null || operation === undefined) {
       let parent_context = context.parent
       if (parent_context === null || parent_context === undefined)
         parent_context = { ...context, next: 0 }
+
+        await GA.collect_screen({
+          user        : messaging.sender.id,
+          app_name    : bot.get('name'),
+          content     : parent_context.id,
+        })
 
       return {
         should_continue : true,
@@ -158,8 +177,9 @@ class Scenario {
     if (payload.should_continue)
       next_context.next = payload.next === null || payload.next === undefined ? operation.next : payload.next
 
-    if (payload.scenario)
+    if (payload.scenario) {
       next_context = { ...payload.scenario, parent: next_context }
+    }
 
     if (payload.should_restart === true)
       next_context = {}

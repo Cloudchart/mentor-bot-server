@@ -1,3 +1,4 @@
+import GA from '../../google'
 import Operation from '../operation'
 
 
@@ -37,11 +38,29 @@ export default class extends Operation {
   resolve = async (bot, messaging, context, next) => {
     await bot.sendSenderAction(messaging.sender.id, 'typing_on')
 
-    if (this.quick_replies.length > 0)
-      await bot.sendQuickReply(messaging.sender.id, this.text, this.quick_replies)
+    let message = this.text.trim()
 
-    if (this.quick_replies.length === 0)
+    await GA.collect_event({
+      user      : messaging.sender.id,
+      category  : 'message',
+      action    : 'message-show',
+      label     :  message
+    })
+
+    if (this.quick_replies.length > 0) {
+      await GA.collect_event({
+        user      : messaging.sender.id,
+        category  : 'message',
+        action    : 'message-buttons-show',
+        label     :  this.quick_replies.map(({ title }) => title).join(',')
+      })
+
+      await bot.sendQuickReply(messaging.sender.id, this.text, this.quick_replies)
+    }
+
+    if (this.quick_replies.length === 0) {
       await bot.sendTextMessage(messaging.sender.id, this.text)
+    }
 
     next()
   }

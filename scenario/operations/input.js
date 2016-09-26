@@ -1,3 +1,4 @@
+import GA from '../../google'
 import Operation from '../operation'
 
 
@@ -10,7 +11,7 @@ export default class extends Operation {
 
     this.timeout  = config.timeout
 
-    this.config   = config
+    // this.config   = config
   }
 
 
@@ -24,6 +25,13 @@ export default class extends Operation {
 
     if (this.timeout && this.timeout.hasOwnProperty('next'))
       step = this.timeout.next
+
+      await GA.collect_event({
+        user        : messaging.sender.id,
+        category    : 'input',
+        action      : 'input-timeout',
+        label       : step || 'next',
+      })
 
     return next({ next: step })
   }
@@ -39,6 +47,21 @@ export default class extends Operation {
       : null
 
     await this.resolveSideEffect(bot, messaging, context, branch)
+
+    await GA.collect_event({
+      user        : messaging.sender.id,
+      category    : 'input',
+      action      : 'input-select',
+      label       : query,
+    })
+
+    if (branch)
+      await GA.collect_event({
+        user        : messaging.sender.id,
+        category    : 'input',
+        action      : 'input-goto',
+        label       : this.scenario.id + ':' + Object.keys(this.scenario.labels).find(key => this.scenario.labels[key] === branch),
+      })
 
     return next({ next: branch })
   }
