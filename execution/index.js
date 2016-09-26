@@ -147,7 +147,7 @@ const resolve = async ({ bot, messaging }) => {
 
     let payload = await scenario.resolve(bot, messaging, { ...state })
 
-    await saveScenarioState(bot, messaging.sender, payload.context)
+    await saveScenarioState(bot, messaging.sender, payload.context).catch(console.error)
 
     if (payload.should_continue)
       return await resolve({ bot, messaging: { sender: messaging.sender, ...payload.messaging } })
