@@ -56,34 +56,34 @@ export default {
       content:'1. Heat water. Let it sit for about a minute, so the temperature would fall to about 96°C. Experiment with time (or temperature if you have a thermometer). With Aeropress, you can go as low as 72…76°C.'
     },
     {
-      blocks  : [
-        {
-          type  : 'image',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/grind.jpg',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p2.jpg',
+          }
+        ],
       id:'7c86e2b8-61a6-d1a4-be2c-c896a570e817',
       tags:['aeropress-en'],
       content:'2. Grind coffee. Grind 15 to 17 grams of coffee. Start with a medium grind and 16 g.'
     },
     {
-      blocks  : [
-        {
-          type  : 'video',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/inserting.mov',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p3.jpg',
+          }
+        ],
       id:'8dcb363d-c878-e858-7fe8-79090b30898a',
       tags:['aeropress-en'],
       content:'3. Prepare brewer. Insert the plunger inside the main section about 5 mm deep and put it on the plunger.'
     },
     {
-      blocks  : [
-        {
-          type  : 'video',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/rinse.mov',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p4.jpg',
+          }
+        ],
       id:'e13d149d-ca8a-7945-2d13-bce5dad8fe43',
       tags:['aeropress-en'],
       content:'4. Put a paper filter into the filter holder, rinse it with water. Set aside.'
@@ -94,66 +94,78 @@ export default {
       content:'5. Place your Aeropress on the scale.'
     },
     {
-      blocks  : [
-        {
-          type  : 'video',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/stir.mov',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p6.jpg',
+          }
+        ],
       id:'2cb84150-be8f-8163-695c-41a090b04af6',
       tags:['aeropress-en'],
       content:'6. Put your ground coffee inside the Aeropress. Bloom it with 30 to 50 g of water. Some grounds don’t require blooming; most do, otherwise you risk spilling blooming coffee over the top. Wait 10…15 seconds. Gently stir coffee with the provided plastic spoon at least three times.'
     },
     {
-      blocks  : [
-        {
-          type  : 'video',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/pouring.mov',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p7.jpg',
+          }
+        ],
       id:'3170dfbf-9f1c-d989-539d-df8436b12cb8',
       tags:['aeropress-en'],
       content:'7. Brew coffee. Pour heated water evenly over the bloomed coffee. When you reach the mark (or the top, allow for 2–3 mm), stir again.'
     },
     {
-      blocks  : [
-        {
-          type  : 'video',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/lid.mov',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p8.jpg',
+          }
+        ],
       id:'bd87489a-3e41-fce4-6cba-d0c95468252f',
       tags:['aeropress-en'],
       content:'8. If you use a paper filter, just put the filter lid on, screw it in. If you use a metal filter, carefully put it on top. Screw the lid in. Let it sit for up to a minute.'
       },
       {
+          blocks  : [
+            {
+              type  : 'image',
+              url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p9.jpg',
+            }
+          ],
       id:'c20a8452-37a1-1678-7d89-89d9a0ef873e',
       tags:['aeropress-en'],
       content:'9. Prepare your cup or mug. If it’s a small cup, use the provided plastic extender part so you won’t break the cup or spill the coffee. Put the extender on top of the Aeropress.'
     },
     {
-      blocks  : [
-        {
-          type  : 'video',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/invert.mov',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p10.jpg',
+          }
+        ],
       id:'1f2dfafc-1d1e-50d7-bca7-aeb8b49ae32f',
       tags:['aeropress-en'],
       content:'10. Invert your brewer. Take the main section in one hand, holding the extender with your index finger, and support the plunger with your other hand so it won’t fall out. Now carefully turn it upside down in its correct working position and place it inside your mug.'
     },
     {
-      blocks  : [
-        {
-          type  : 'video',
-          url   : 'http://getmentorbot.com/mentorbot/admin/images/pushing.mov',
-        }
-      ],
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p11.jpg',
+          }
+        ],
       id:'4c846ad2-5282-c460-b32a-5c3b7e314f17',
       tags:['aeropress-en'],
       content:'11. Now slowly push the plunger, aiming at a 20 second push. If you want a cleaner-tasting coffee, stop at mark 1 and push the rest of the brew into your sink. If you want a stronger cup, push it all the way down.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p12.jpg',
+          }
+        ],
       id:'73d6f80e-bdf1-f923-7549-497434d00a32',
       tags:['aeropress-en'],
       content:'12. Clean your Aeropress. Remove the cap. If you use a metal filter, get it out and rinse it. Now take your Aeropress to your waste basked and with one strong fast push discard the grounds. Rinse the top of the plunger.'
@@ -164,21 +176,45 @@ export default {
       content:'1. Bring water to a boil'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p2.jpg',
+          }
+        ],
       id:'ca421e5e-d09d-259c-a53a-2f96f03ac97a',
       tags:['chemex-en'],
       content:'2. Weigh and grind coffee. Grind 15 to 17 grams of coffee. Start with a medium grind and 16 g.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p3.jpg',
+          }
+        ],
       id:'a420a924-8c64-72db-c63e-a1a9af23cf66',
       tags:['chemex-en'],
       content:'3. Rinse filter with hot water. Rinse it to get the papery taste off. Place it in the brewer.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p4.jpg',
+          }
+        ],
       id:'e1f2b272-ae85-c95a-c515-5a72056c974d',
       tags:['chemex-en'],
       content:'4. Bloom coffee. Add grounds and put the brewer on your scale. Gently pour about 50 g of water, covering the grounds. Hold the brewer and swirl the water around to wet the rest of the grounds. The coffee would rise because of a carbon dioxide release. Wait about half a minute.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p5.jpg',
+          }
+        ],
       id:'9452732b-3d95-e828-b6ba-31e46f582c85',
       tags:['chemex-en'],
       content:'5. Brew. Continue pouring another 200 g of water over coffee, ultimately maintain its level inside the filter. When you’re done, slowly discard the filter and grounds.'

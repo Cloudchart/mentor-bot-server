@@ -58,7 +58,7 @@ export default {
         blocks  : [
           {
             type  : 'image',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/grind.jpg',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p2.jpg',
           }
         ],
      id:'31c31491-d307-f0fd-efa5-79c64f0c8adc',
@@ -68,8 +68,8 @@ export default {
     {
         blocks  : [
           {
-            type  : 'video',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/inserting.mov',
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p3.jpg',
           }
         ],
      id:'35535246-6e12-6cea-2010-7a64274b1085',
@@ -79,8 +79,8 @@ export default {
     {
         blocks  : [
           {
-            type  : 'video',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/rinse.mov',
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p4.jpg',
           }
         ],
      id:'218eb3b7-d8be-93ad-fbe2-2625d28457eb',
@@ -95,8 +95,8 @@ export default {
     {
         blocks  : [
           {
-            type  : 'video',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/stir.mov',
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p6.jpg',
           }
         ],
      id:'354a5ce5-f236-8378-9b25-ec5cba1c2357',
@@ -106,8 +106,8 @@ export default {
     {
         blocks  : [
           {
-            type  : 'video',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/pouring.mov',
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p7.jpg',
           }
         ],
      id:'e10570b5-d97a-4175-fd79-ebf12e2da8d1',
@@ -117,8 +117,8 @@ export default {
     {
         blocks  : [
           {
-            type  : 'video',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/lid.mov',
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p8.jpg',
           }
         ],
      id:'379a6ead-2d6e-d28d-3281-49c2e26fde0d',
@@ -126,6 +126,12 @@ export default {
      content:'8. Если вы используете бумажный фильтр, просто вставьте крышку с фильтром сверху и прикрутите её. Если вы используете металлический фильтр, аккуратно установите его сверху. Накройте крышкой и завинтите её.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p9.jpg',
+          }
+        ],
      id:'b1b08c3b-2a06-4f81-c23c-41f9c5a17efe',
      tags:['aeropress-ru'],
      content:'9. Дайте постоять до минуты. Приготовьте чашку или кружку. Если у вас небольшая или хрупкая чашка, используйте пластиковую воронку, идущую в комплекте, чтобы не разбить чашку и не пролить мимо кофе. Наденьте воронку на крышку аэропресса.'
@@ -133,8 +139,8 @@ export default {
     {
         blocks  : [
           {
-            type  : 'video',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/invert.mov',
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p10.jpg',
           }
         ],
      id:'7bea8974-801c-e8a7-6137-8ed579d12e34',
@@ -144,8 +150,8 @@ export default {
     {
         blocks  : [
           {
-            type  : 'video',
-            url   : 'http://getmentorbot.com/mentorbot/admin/images/pushing.mov',
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p11.jpg',
           }
         ],
      id:'5e5b2456-c732-e738-b5be-7820c24965ed',
@@ -153,6 +159,12 @@ export default {
      content:'11. Выдавите кофе. Медленно нажимайте на поршень, стараясь выдавить весь кофе примерно за 20 секунд. Если вы хотите чашку более чистого по вкусу кофе, остановитесь на единичной отметке, а остатки выдавите уже в раковину. Если хотите чашку покрепче, давите до конца.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/AeroPress_p12.jpg',
+          }
+        ],
      id:'5ecb856c-f85a-29c9-d6fe-58c8792eceac',
      tags:['aeropress-ru'],
      content:'12. Помойте Aeropress. Удалите крышку. Если вы используете металлический фильтр, удалите и промойте его. Теперь перенесите аэропресс к мусорному ведру и одним резким ударом по поршню удалите помол. Промойте поршень.'
@@ -163,21 +175,45 @@ export default {
      content:'1. Вскипятите воду'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p2.jpg',
+          }
+        ],
      id:'cc642732-1b05-4254-ec60-3cd75e2b8f9f',
      tags:['chemex-ru'],
      content:'2. Взвесьте от 15 до 17 граммов кофе. Начните с 16 г и среднего помола. Начните с помола среднего размера, экспериментируйте.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p3.jpg',
+          }
+        ],
      id:'c6c09f0c-4d52-8cfa-45b6-8fe1374dc3b7',
      tags:['chemex-ru'],
      content:'3. Сполосните фильтр горячей водой. Промойте фильтр, чтобы убрать бумажный привкус. Положите его в кофеварку.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p4.jpg',
+          }
+        ],
      id:'1c192ce3-c516-f6ad-68d2-3214e759a49f',
      tags:['chemex-ru'],
      content:'4. Предсмачивание. Добавьте помол и поставьте кофеварку на весы. Медленно влейте примерно 50 г воды, стараясь равномерно увлажнить помол. Удерживая кофеварку, повращайте воду в фильтре, чтобы помол был равномерно смочен водой. Кофе поднимется, слегка бурля — это выходит углекислый газ, содержащийся в кофе. Подождите примерно полминуты, пока кофе не осядет.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/Hario_p5.jpg',
+          }
+        ],
      id:'4e6ecf6d-d8df-424a-e54a-4a2a3f3c1231',
      tags:['chemex-ru'],
      content:'5. Заваривайте. Продолжайте медленно вливать ещё 200 г воды, стараясь удерживать уровень воды в фильтре. Это может занять несколько минут. Когда вся вода уйдёт, осторожно удалите фильтр с помолом.'
