@@ -13,7 +13,7 @@ export default new Scenario({
       text  : `
         I know only four basic recipes currently, it's Chemex/V60, Aeropress, Moka pot and Frenchpress (without actually pressing)
       `,
-      quick_replies:  ['Chemex', 'Aeropress', 'Moka pot', 'French Press']
+      quick_replies:  ['V60', 'Aeropress', 'Moka pot', 'French Press']
     },
 
     {
@@ -21,7 +21,7 @@ export default new Scenario({
       branch  : {
         'Moka pot'     : 'moka pot',
         'Aeropress'  : 'aeropress',
-        'Chemex'     : 'chemex',
+        'V60'     : 'chemex',
         'French Press' : 'frenchpress',
       }
     },
@@ -162,6 +162,20 @@ export default new Scenario({
       label   : 'end',
       text    : 'Now enjoy your coffee!',
     },
+    {
+      label         : 'endquestion',
+      type          : 'message',
+      text          : `
+        Did you like this manual?
+      `,
+      quick_replies : ['No', 'Yes']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Yes'  : 'liked-recipe',
+        'No' : 'disliked-recipe'
+      },
 
 
   ]

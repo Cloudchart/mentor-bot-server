@@ -166,7 +166,7 @@ export default {
     {
       id:'ca421e5e-d09d-259c-a53a-2f96f03ac97a',
       tags:['chemex-en'],
-      content:'2. Weigh and grind coffee. Start with a medium-size grind and experiment.'
+      content:'2. Weigh and grind coffee. Grind 15 to 17 grams of coffee. Start with a medium grind and 16 g.'
     },
     {
       id:'a420a924-8c64-72db-c63e-a1a9af23cf66',
@@ -176,12 +176,12 @@ export default {
     {
       id:'e1f2b272-ae85-c95a-c515-5a72056c974d',
       tags:['chemex-en'],
-      content:'4. Bloom coffee. Add grounds and put the brewer on your scale. Gently pour about 200 g of water, covering the grounds. Hold the brewer and swirl the water around to wet the rest of the grounds. The coffee would rise because of a carbon dioxide release. Wait about half a minute.'
+      content:'4. Bloom coffee. Add grounds and put the brewer on your scale. Gently pour about 50 g of water, covering the grounds. Hold the brewer and swirl the water around to wet the rest of the grounds. The coffee would rise because of a carbon dioxide release. Wait about half a minute.'
     },
     {
       id:'9452732b-3d95-e828-b6ba-31e46f582c85',
       tags:['chemex-en'],
-      content:'5. Brew. Continue pouring the remaining water over coffee, ultimately maintain its level inside the filter. When you’re done, slowly discard the filter and grounds.'
+      content:'5. Brew. Continue pouring another 200 g of water over coffee, ultimately maintain its level inside the filter. When you’re done, slowly discard the filter and grounds.'
     },
     {
       id:'ca83bd25-f58a-4602-da31-d26c4fe0a32a',

@@ -14,9 +14,9 @@ export default new Scenario({
       label : 'start',
       type  : 'message',
       text  : `
-        Пока что я знаю только о четырёх методах приготовления кофе: Кемекс / Харио, Аэропресс, Гейзерная кофеварка и Френчпресс (без нажатия)
+        Пока что я знаю только о четырёх методах приготовления кофе: Кемекс / V60, Аэропресс, Гейзерная кофеварка и Френчпресс (без нажатия)
       `,
-      quick_replies:  ['Кемекс', 'Аэропресс', 'Гейзер', 'Френчпресс']
+      quick_replies:  ['V60', 'Аэропресс', 'Гейзер', 'Френчпресс']
     },
 
     {
@@ -24,7 +24,7 @@ export default new Scenario({
       branch  : {
         'Гейзер'     : 'moka pot',
         'Аэропресс'  : 'aeropress',
-        'Кемекс'     : 'chemex',
+        'V60'     : 'chemex',
         'Френчпресс' : 'frenchpress',
       }
     },
@@ -181,6 +181,20 @@ export default new Scenario({
       type    : 'message',
       text    : 'Наслаждайтесь вашим кофе!',
     },
+    {
+      label         : 'endquestion',
+      type          : 'message',
+      text          : `
+        Вам понравилась эта инструкция?
+      `,
+      quick_replies : ['Нет', 'Да']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Да'  : 'liked-recipe',
+        'Нет' : 'disliked-recipe'
+      },
 
 
   ]
