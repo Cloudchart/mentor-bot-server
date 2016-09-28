@@ -224,14 +224,26 @@ export default {
      content:'1. Вскипятите воду. Дайте ей закипеть и оставьте на минуту, чтобы температура снизилась примерно до 96°C. Экспериментируйте со временем (или температурой, если у вас есть термометр).'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p2.jpg',
+          }
+        ],
      id:'bcb4cfb8-17e1-dc39-8179-a4803450a126',
      tags:['frenchpress-ru'],
-     content:'2. Взвесьте зерно, сделайте помол. Начните с помола среднего размера, экспериментируйте.'
+     content:'2. Взвесьте зерно, сделайте помол. Вам понадобится около 30 граммов зерна на 400 граммов воды. Начните с помола среднего размера, экспериментируйте.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p3.jpg',
+          }
+        ],
      id:'ba97263b-3790-f56a-dc96-2891d240596d',
      tags:['frenchpress-ru'],
-     content:'3. Добавьте помол во френч-пресс и залейте водой'
+     content:'3. Добавьте помол во френч-пресс и залейте воду'
     },
     {
      id:'d8e9b8af-bf42-9164-5c34-26e9b9f69071',
@@ -239,21 +251,45 @@ export default {
      content:'4. Подождите 3…4 минуты'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p5.jpg',
+          }
+        ],
      id:'3ab8b1d8-6e14-680f-fa39-c528565306a9',
      tags:['frenchpress-ru'],
      content:'5. Перемешивайте образовавшуюся кофейную корку, пока она не осядет'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p6.jpg',
+          }
+        ],
      id:'94f1a4f5-8d4d-15c5-b513-713cbfaba63b',
      tags:['frenchpress-ru'],
      content:'6. Удалите образовавшуюся пену'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p7.jpg',
+          }
+        ],
      id:'5247d053-7d58-ad52-94e0-49d4089cfa5e',
      tags:['frenchpress-ru'],
      content:'7. Установите крышку, но не нажимайте на поршень. Подождите несколько минут, пока мелкий осадок не устаканится на дне френч-пресса.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p8.jpg',
+          }
+        ],
      id:'80c485d5-3d3e-4635-f276-25258f750cdc',
      tags:['frenchpress-ru'],
      content:'8. Наливайте кофе, не нажимая на поршень. Вообще не трогайте поршень — он поднимет осадок. Просто наливайте кофе через фильтр, установленный в крышке. Оставьте немного заварки во френч-прессе, чтобы осадок не просочился через фильтр.'

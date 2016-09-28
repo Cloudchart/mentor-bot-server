@@ -225,11 +225,23 @@ export default {
       content:'1. Heat water. Let it sit for about a minute, so the temperature would fall to about 96°C. Experiment with time (or temperature if you have a thermometer).'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p2.jpg',
+          }
+        ],
       id:'f4341e7e-d7ca-cbe2-297e-27fe45381eff',
       tags:['frenchpress-en'],
-      content:'2. Weigh and grind coffee. Start with a medium-size grind and experiment.'
+      content:'2. Weigh and grind coffee. You`ll need 30 g of coffee for 400 g of water. Start with a medium-size grind and experiment.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p3.jpg',
+          }
+        ],
       id:'be4c205c-fecd-9ecf-7080-f81510ce12ba',
       tags:['frenchpress-en'],
       content:'3. Add the ground coffee to your French press and pour in water'
@@ -240,21 +252,45 @@ export default {
       content:'4. Wait 3 to 4 minutes'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p5.jpg',
+          }
+        ],
       id:'6eca38a1-9426-371a-9c41-312c9a24a017',
       tags:['frenchpress-en'],
       content:'5. Stir until the coffee crust falls down'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p6.jpg',
+          }
+        ],
       id:'5a98f7db-824b-dea5-7c17-fe2df936a6c8',
       tags:['frenchpress-en'],
       content:'6. Scoop off foam'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p7.jpg',
+          }
+        ],
       id:'52cb5af2-bd23-d769-d8e6-da589f97b69b',
       tags:['frenchpress-en'],
       content:'7. Put the lid on, don’t press. Wait a few more munites for the coffee fines to settle on the bottom of your French press.'
     },
     {
+        blocks  : [
+          {
+            type  : 'image',
+            url   : 'http://getmentorbot.com/mentorbot/admin/images/FrenchPress_p8.jpg',
+          }
+        ],
       id:'6e02cbc5-b18e-739a-d235-185bad03898b',
       tags:['frenchpress-en'],
       content:'8. Pour coffee, don\'t press the plunger. Never press the plunger — that will raise sediment. Just pour the coffee through the filter inside your lid. Leave some water in the French press so the fine sediment won’t slip through the filter.'

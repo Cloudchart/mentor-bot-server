@@ -40,7 +40,24 @@ export default new Scenario({
         id      : 'coffee-bot-basics-en',
         source  : 'local',
       },
+      timeout : {
+        delay : 60 * 2 * 1000,
+        next  : 'first-delay'
+      },
       next    : 'second',
+    },
+    {
+      label : 'first-delay'    
+      type  : 'message',
+      text  : `Are you still interested or would like to quit?`,
+      quick_replies : ['Quit', 'Interested']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Interested' : 'first-yes',
+        'Quit'  : 'second'
+      }
     },
 
     {
@@ -71,10 +88,27 @@ export default new Scenario({
       type    : 'card-list',
       tags    : ['equipment-en'],
       next    : 'third',
+        timeout : {
+          delay : 60 * 2 * 1000,
+          next  : 'second-delay'
+        },
       course  : {
         id      : 'coffee-bot-basics-en',
         source  : 'local',
       },
+    },
+    {
+      label : 'second-delay'    
+      type  : 'message',
+      text  : `Are you still interested or would like to quit?`,
+      quick_replies : ['Quit', 'Interested']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Interested' : 'second-yes',
+        'Quit'  : 'third'
+      }
     },
 
     {
@@ -104,13 +138,30 @@ export default new Scenario({
       label   : 'third-yes',
       type    : 'card-list',
       tags    : ['brewing-en'],
+        timeout : {
+          delay : 60 * 2 * 1000,
+          next  : 'third-delay'
+        },
       course  : {
         id      : 'coffee-bot-basics-en',
         source  : 'local',
       },
       next    : 'end',
     },
-
+    {
+      label : 'third-delay'    
+      type  : 'message',
+      text  : `Are you still interested or would like to quit?`,
+      quick_replies : ['Quit', 'Interested']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Interested' : 'third-yes',
+        'Quit'  : 'end'
+      }
+    },
+    
     {
       label : 'end',
       type  : 'message',

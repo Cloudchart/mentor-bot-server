@@ -40,11 +40,28 @@ export default new Scenario({
         id      : 'coffee-bot-basics-ru',
         source  : 'local',
       },
+      timeout : {
+        delay : 60 * 2 * 1000,
+        next  : 'first-delay'
+      },
       next    : 'second',
       skip_button_label : 'Далее',
       save_button_label : 'Сoхранить',
       skip_button_hint  : 'Здесь все понятно, идем дальше.',
       save_button_hint  : 'Карточка сохранена, Все сохраненные карточки будут доступны в специальном разделе меню.',
+    },
+    {
+      label : 'first-delay'    
+      type  : 'message',
+      text  : `Вам ещё интересно или вы хотите пропустить эту часть?`,
+      quick_replies : ['Пропустить', 'Интересно']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Интересно' : 'first-yes',
+        'Пропустить'  : 'second'
+      }
     },
 
     {
@@ -78,11 +95,28 @@ export default new Scenario({
         id      : 'coffee-bot-basics-ru',
         source  : 'local',
       },
+      timeout : {
+        delay : 60 * 2 * 1000,
+        next  : 'second-delay'
+      },
       next    : 'third',
       skip_button_label : 'Далее',
       save_button_label : 'Сoхранить',
       skip_button_hint  : 'Здесь все понятно, идем дальше.',
       save_button_hint  : 'Карточка сохранена, Все сохраненные карточки будут доступны в специальном разделе меню.',
+    },
+    {
+      label : 'second-delay'    
+      type  : 'message',
+      text  : `Вам ещё интересно или вы хотите пропустить эту часть?`,
+      quick_replies : ['Пропустить', 'Интересно']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Интересно' : 'second-yes',
+        'Пропустить'  : 'third'
+      }
     },
 
     {
@@ -116,11 +150,28 @@ export default new Scenario({
         id      : 'coffee-bot-basics-ru',
         source  : 'local',
       },
+      timeout : {
+        delay : 60 * 2 * 1000,
+        next  : 'third-delay'
+      },
       next    : 'end',
       skip_button_label : 'Далее',
       save_button_label : 'Сoхранить',
       skip_button_hint  : 'Здесь все понятно, идем дальше.',
       save_button_hint  : 'Карточка сохранена, Все сохраненные карточки будут доступны в специальном разделе меню.',
+    },
+    {
+      label : 'third-delay'    
+      type  : 'message',
+      text  : `Вам ещё интересно или вы хотите пропустить эту часть?`,
+      quick_replies : ['Пропустить', 'Интересно']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Интересно' : 'third-yes',
+        'Пропустить'  : 'end'
+      }
     },
 
     {
