@@ -118,6 +118,21 @@ export default new Scenario({
         Ok, it seems like you know the basics now.
       `,
     },
+    {
+      label         : 'endquestion',
+      type          : 'message',
+      text          : `
+        Did you like this course?
+      `,
+      quick_replies : ['No', 'Yes']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Yes'  : 'liked-basics',
+        'No' : 'disliked-basics'
+      },
+
   ]
 
 })

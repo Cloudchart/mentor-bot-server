@@ -130,6 +130,21 @@ export default new Scenario({
         Похоже, теперь вы знаете основы.
       `,
     },
+    {
+      label         : 'endquestion',
+      type          : 'message',
+      text          : `
+        Вам понравился этот курс?
+      `,
+      quick_replies : ['Нет', 'Да']
+    },
+    {
+      type    : 'input',
+      branch  : {
+        'Да'  : 'liked-basics',
+        'Нет' : 'disliked-basics'
+      },
+    },
   ]
 
 })
