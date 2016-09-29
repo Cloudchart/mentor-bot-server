@@ -176,6 +176,7 @@ export default new Scenario({
         'Yes'  : 'liked-recipe',
         'No' : 'disliked-recipe'
       },
+    }
 
 
   ]

@@ -47,7 +47,7 @@ export default new Scenario({
       next    : 'second',
     },
     {
-      label : 'first-delay'    
+      label : 'first-delay',
       type  : 'message',
       text  : `Are you still interested or would like to quit?`,
       quick_replies : ['Quit', 'Interested']
@@ -98,7 +98,7 @@ export default new Scenario({
       },
     },
     {
-      label : 'second-delay'    
+      label : 'second-delay',
       type  : 'message',
       text  : `Are you still interested or would like to quit?`,
       quick_replies : ['Quit', 'Interested']
@@ -149,7 +149,7 @@ export default new Scenario({
       next    : 'end',
     },
     {
-      label : 'third-delay'    
+      label : 'third-delay',
       type  : 'message',
       text  : `Are you still interested or would like to quit?`,
       quick_replies : ['Quit', 'Interested']
@@ -161,7 +161,7 @@ export default new Scenario({
         'Quit'  : 'end'
       }
     },
-    
+
     {
       label : 'end',
       type  : 'message',
@@ -183,6 +183,7 @@ export default new Scenario({
         'Yes'  : 'liked-basics',
         'No' : 'disliked-basics'
       },
+    }
 
   ]
 

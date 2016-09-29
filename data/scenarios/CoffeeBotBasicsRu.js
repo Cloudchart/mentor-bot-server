@@ -51,7 +51,7 @@ export default new Scenario({
       save_button_hint  : 'Карточка сохранена, Все сохраненные карточки будут доступны в специальном разделе меню.',
     },
     {
-      label : 'first-delay'    
+      label : 'first-delay',
       type  : 'message',
       text  : `Вам ещё интересно или вы хотите пропустить эту часть?`,
       quick_replies : ['Пропустить', 'Интересно']
@@ -106,7 +106,7 @@ export default new Scenario({
       save_button_hint  : 'Карточка сохранена, Все сохраненные карточки будут доступны в специальном разделе меню.',
     },
     {
-      label : 'second-delay'    
+      label : 'second-delay',
       type  : 'message',
       text  : `Вам ещё интересно или вы хотите пропустить эту часть?`,
       quick_replies : ['Пропустить', 'Интересно']
@@ -161,7 +161,7 @@ export default new Scenario({
       save_button_hint  : 'Карточка сохранена, Все сохраненные карточки будут доступны в специальном разделе меню.',
     },
     {
-      label : 'third-delay'    
+      label : 'third-delay',
       type  : 'message',
       text  : `Вам ещё интересно или вы хотите пропустить эту часть?`,
       quick_replies : ['Пропустить', 'Интересно']

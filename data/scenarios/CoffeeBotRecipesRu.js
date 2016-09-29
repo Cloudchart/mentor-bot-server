@@ -195,6 +195,7 @@ export default new Scenario({
         'Да'  : 'liked-recipe',
         'Нет' : 'disliked-recipe'
       },
+    }
 
 
   ]
