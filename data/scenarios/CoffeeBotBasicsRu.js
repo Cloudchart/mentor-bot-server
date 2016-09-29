@@ -196,6 +196,18 @@ export default new Scenario({
         'Нет' : 'disliked-basics'
       },
     },
+    {
+      type    : 'message',
+      label   : 'liked-basics',
+      text    : 'Спасибо!',
+      next    : 'quit',
+    },
+    {
+      type    : 'message',
+      label   : 'disliked-basics',
+      text    : 'Жаль. Расскажите, почему вам не понравилось на почту team@insights.vc!',
+      next    : 'quit',
+    },
   ]
 
 })

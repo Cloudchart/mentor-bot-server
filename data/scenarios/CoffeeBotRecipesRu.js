@@ -174,8 +174,6 @@ export default new Scenario({
       },
       next    : 'aeropress-delay',
     },
-
-
     {
       label   : 'end',
       type    : 'message',
@@ -195,8 +193,19 @@ export default new Scenario({
         'Да'  : 'liked-recipe',
         'Нет' : 'disliked-recipe'
       },
-    }
-
+    },
+    {
+      type    : 'message',
+      label   : 'liked-recipe',
+      text    : 'Спасибо!',
+      next    : 'quit',
+    },
+    {
+      type    : 'message',
+      label   : 'disliked-recipe',
+      text    : 'Жаль. Расскажите, почему вам не понравилось на почту team@insights.vc!',
+      next    : 'quit',
+    },
 
   ]
 
