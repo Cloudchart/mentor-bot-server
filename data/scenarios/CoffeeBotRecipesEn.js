@@ -176,7 +176,18 @@ export default new Scenario({
         'Yes'  : 'liked-recipe',
         'No' : 'disliked-recipe'
       },
-
+      {
+        type    : 'message',
+        label   : 'liked-recipe',
+        text    : 'Thanks!',
+        next    : 'quit',
+      },
+      {
+        type    : 'message',
+        label   : 'disliked-recipe',
+        text    : 'Well, tell us why at team@insights.vc.',
+        next    : 'quit',
+      },
 
   ]
 

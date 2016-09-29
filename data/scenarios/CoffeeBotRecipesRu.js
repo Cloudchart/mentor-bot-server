@@ -189,12 +189,24 @@ export default new Scenario({
       `,
       quick_replies : ['Нет', 'Да']
     },
-    {
-      type    : 'input',
-      branch  : {
-        'Да'  : 'liked-recipe',
-        'Нет' : 'disliked-recipe'
-      },
+      {
+        type    : 'input',
+        branch  : {
+          'Да'  : 'liked-recipe',
+          'Нет' : 'disliked-recipe'
+        },
+        {
+          type    : 'message',
+          label   : 'liked-recipe',
+          text    : 'Спасибо!',
+          next    : 'quit',
+        },
+        {
+          type    : 'message',
+          label   : 'disliked-recipe',
+          text    : 'Жаль. Расскажите, почему вам не понравилось на почту team@insights.vc!',
+          next    : 'quit',
+        },
 
 
   ]
