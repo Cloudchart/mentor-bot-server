@@ -183,7 +183,19 @@ export default new Scenario({
         'Yes'  : 'liked-basics',
         'No' : 'disliked-basics'
       },
-    }
+    },
+    {
+      type    : 'message',
+      label   : 'liked-basics',
+      text    : 'Thanks!',
+      next    : 'quit',
+    },
+    {
+      type    : 'message',
+      label   : 'disliked-basics',
+      text    : 'Well, tell us why at team@insights.vc.',
+      next    : 'quit',
+    },
 
   ]
 
